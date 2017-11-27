@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15/06/2016, 06:38:52 PM
+    Author     : Carlos
+*/
+
+BODY {
+background-attachment: scroll;
+background-repeat: repeat;
+/*background-color: #FFDEAD;*/
+text-align: center;
+background-image: url("../resources/images/logoclinicavet.jpg");
+} 
+
+
+
+
+.companyHeaderGrid.ui-panelgrid>*>tr,
+.companyHeaderGrid.ui-panelgrid>*>tr>td {
+    border: none;
+}
+

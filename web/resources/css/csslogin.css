@@ -1,0 +1,29 @@
+BODY {
+background-attachment: scroll;
+background-repeat: no-repeat;
+background-color: #FFDEAD;
+text-align: center;
+/*position: absolute;*/
+} 
+
+#bartolo {
+background-color: #ffffff;
+width: 800px;
+margin: 4px auto ;
+} 
+
+#panelprin{
+    width: 70%;
+}
+
+#panelinfoemp tr,#panelinfoemp td{
+                                    border:none;
+                                    border-color:#ffffff;
+                                }
+                                
+.alinizq{
+    text-align: left;    
+}
+.alinder{
+    text-align: right;    
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/11/2017 05:12:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdbiblioteca" name="com.pe.appweb.proybiblioteca.entidades.Tipopersonal" optimistic-lock="version" table="tipopersonal">
+    <id name="idTipoPersonal" type="int">
+      <column name="idTipoPersonal"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string">
+      <column length="45" name="nombre" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="personals" table="personal">
+      <key>
+        <column name="tipopersonal_idTipoPersonal" not-null="true"/>
+      </key>
+      <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Personal"/>
+    </set>
+  </class>
+</hibernate-mapping>

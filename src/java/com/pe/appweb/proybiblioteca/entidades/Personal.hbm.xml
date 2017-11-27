@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/11/2017 05:12:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdbiblioteca" name="com.pe.appweb.proybiblioteca.entidades.Personal" optimistic-lock="version" table="personal">
+    <id name="idPersonal" type="int">
+      <column name="idPersonal"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.pe.appweb.proybiblioteca.entidades.Tipopersonal" fetch="select" name="tipopersonal">
+      <column name="tipopersonal_idTipoPersonal" not-null="true"/>
+    </many-to-one>
+    <property name="nombre" type="string">
+      <column length="35" name="nombre" not-null="true"/>
+    </property>
+    <property name="apellido" type="string">
+      <column length="35" name="apellido" not-null="true"/>
+    </property>
+    <property name="telefono" type="java.lang.Integer">
+      <column name="telefono"/>
+    </property>
+    <property name="correo" type="string">
+      <column length="50" name="correo"/>
+    </property>
+    <property name="sexo" type="string">
+      <column length="1" name="sexo" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="prestamos" table="prestamo">
+      <key>
+        <column name="personal_idPersonal" not-null="true"/>
+      </key>
+      <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Prestamo"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="usuarios" table="usuario">
+      <key>
+        <column name="personal_idPersonal" not-null="true"/>
+      </key>
+      <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Usuario"/>
+    </set>
+  </class>
+</hibernate-mapping>

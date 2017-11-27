@@ -1,0 +1,12 @@
+body {
+    background-color: #eeeeee;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+    /*background-attachment: fixed;*/
+}
+
+h1 {
+    color: #000000;
+}

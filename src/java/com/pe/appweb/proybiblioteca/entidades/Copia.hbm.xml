@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25/11/2017 05:12:30 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="bdbiblioteca" name="com.pe.appweb.proybiblioteca.entidades.Copia" optimistic-lock="version" table="copia">
+    <id name="idCopia" type="int">
+      <column name="idCopia"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="com.pe.appweb.proybiblioteca.entidades.Libro" fetch="select" name="libro">
+      <column name="libro_idLibro" not-null="true"/>
+    </many-to-one>
+    <property name="estado" type="boolean">
+      <column name="estado" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="prestamos" table="prestamo">
+      <key>
+        <column name="copia_idCopia" not-null="true"/>
+      </key>
+      <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Prestamo"/>
+    </set>
+  </class>
+</hibernate-mapping>

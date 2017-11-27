@@ -1,0 +1,105 @@
+#divInicioSesion{
+    color: black;
+    position: fixed;
+    right: 10px;
+    top: 15px;
+    font-family: arial;
+    font-size: small;    
+}
+#divInicioSesion > span
+{
+    color: black;
+    font-family: arial;
+    font-size:  x-small;
+}
+#divTitulo > span
+{
+    color: black;
+    font-family: arial;
+    font-size:  30px;
+    top:  100px;
+    font-weight: bold;   
+    color: #000000;    
+    padding: 0px;
+}
+        
+#top {
+    background-color: #E3F0F8;
+    /*background-color: #036fab*/
+    color: #000000;
+    left: 0px;
+    height: 105px;
+    position: fixed;
+    top: 0px;
+    width: 100%; 
+    z-index: 1000;
+    box-shadow: 0px 2px 2px rgba(0,0,0,0.7);
+}
+
+.center_content {
+    /*position:fixed;*/
+    background-color: white;
+    margin-top: 98px;
+    padding: 0px;
+    /*box-shadow: 0px 0px 2px black;*/
+    height: 100%;
+    left: 15%;
+    width: 70%;
+    position: absolute;
+    /*margin-top: 50px;*/
+    
+}
+.companyHeaderGrid.ui-panelgrid>*>tr,
+.companyHeaderGrid.ui-panelgrid>*>tr>td {
+    border: none;
+}
+.left_content {
+    position: fixed;
+    background-color: white;
+    margin-top: 80px;
+    padding: 0%;    
+    width: 15%;
+    left: 0px;
+    height: 100%;
+}
+.right_content {
+    position: fixed;
+    background-color: white;
+    margin-top: 80px;
+    padding: 0%;    
+    width: 15%;
+    left: 85%;
+    height: 100%;
+}
+/*MegaMenu*/
+#headerMenu {
+    background-color: rgba(88,56,32,0);
+    font-family: arial;
+    font-size: small;
+    color: #000000;    
+}
+.headerColumn {
+    background-color: rgba(88,56,32,0);
+    font-family: arial;
+    font-size: small;
+    color: #000000;
+}
+.ui-menu.ui-megamenu .ui-menu-parent .ui-menu-child {
+  width: auto;
+  opacity: 0.8;
+}
+.ui-menuitem-text
+{
+font-size: 10px;
+font-weight: normal;
+text-decoration: none;
+color: #000000;
+}
+
+                                
+.alinizq{
+    text-align: left;    
+}
+.alinder{
+    text-align: right;    
+}
