@@ -20,4 +20,6 @@ public interface TipoPersonalService {
     public abstract boolean ActualizarTipopersonal(Session session, Tipopersonal tipo);
     public abstract Integer ContadorRegistroTipopersonal(Session session);
     public boolean EliminarTipopersonalId(Session session, Tipopersonal tipo);
+    public abstract Tipopersonal BuscarTipoPersonalId(Session session, int idLibro);
+
 }

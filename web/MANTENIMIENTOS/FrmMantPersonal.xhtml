@@ -78,9 +78,10 @@
                                         <p:outputLabel  value="Tipo :" for="idPersonal" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idPersonal" value="#{mantTipopersonalMBR.listatipopersonal}" style="font-family: arial;width: 180px">                                        
+                                        <p:selectOneMenu id="idPersonal" value="#{mantPersonalMBR.tipopersonal.idTipoPersonal}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
-                                            <f:selectItems value="#{mantPersonalMBR.tipopersonal}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idtipopersonal}"/> 
+                                            <f:selectItems value="#{mantTipopersonalMBR.listatipopersonal}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idTipoPersonal}"/> 
+                                            
                                         </p:selectOneMenu>
                                     </p:column>
                                     
@@ -102,6 +103,7 @@
                     <h:form id="frmListaTAutor">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
                         <p:panel style="width: 750px" id="paneltable">
+                            <!--
                             <p:dataTable rowKey="#{item.idPersonal}" id="tablaListaTAutor" var="item" value="#{mantPersonalMBR.listadoPersonal()}" scrollable="true" scrollHeight="150"  
                                          style="width: 720px" selection="#{mantPersonalMBR.personalcombos}" selectionMode="single" 
                                          emptyMessage="No se encontro información">
@@ -126,14 +128,14 @@
                                     <h:outputText value=" #{item.sexo}"/>
                                 </p:column>
                                 <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipopersonal}">
-                                    <h:outputText value=" #{item.tipopersonal}"/>
+                                    <h:outputText value=" #{item.tipopersonal.nombre}"/>
                                 </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
                                     <p:commandButton immediate="true" value="Eliminar" action="#{mantPersonalMBR.eliminarPersonal(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
 
                             </p:dataTable>
-
+                            -->
                         </p:panel>
                     </h:form>
                     

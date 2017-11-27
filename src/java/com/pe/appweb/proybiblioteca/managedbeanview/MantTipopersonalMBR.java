@@ -48,6 +48,7 @@ public class MantTipopersonalMBR extends MensajeSYSUtils implements Serializable
     }
 
     private void initlistDep() {
+        listadoTipopersonal();
     }
 
     public String eliminarTipopersonal(Tipopersonal tipopersonal){

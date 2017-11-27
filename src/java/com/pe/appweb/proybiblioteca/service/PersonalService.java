@@ -20,4 +20,5 @@ public interface PersonalService {
     public abstract boolean ActualizarPersonal(Session session, Personal personal);
     public abstract Integer ContadorRegistroPersonal(Session session);
     public boolean EliminarPersonalId(Session session, Personal personal);
+    
 }

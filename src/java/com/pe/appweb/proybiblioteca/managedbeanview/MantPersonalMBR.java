@@ -6,6 +6,7 @@
 package com.pe.appweb.proybiblioteca.managedbeanview;
 
 import com.pe.appweb.proybiblioteca.dao.PersonalDAO;
+import com.pe.appweb.proybiblioteca.dao.TipopersonalDAO;
 import com.pe.appweb.proybiblioteca.entidades.Personal;
 import com.pe.appweb.proybiblioteca.entidades.Tipopersonal;
 import com.pe.appweb.proybiblioteca.util.HibernateUtil;
@@ -25,36 +26,43 @@ import org.hibernate.Transaction;
  */
 @ManagedBean
 @ViewScoped
-public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
-    
+public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
+
     Session session;
     Transaction transaction;
-    
-    private Tipopersonal tipopersonal;
+
     private Personal personal;
     private Personal personalcombos;
     private PersonalDAO personalDAO;
     private List<Personal> listapersonal;
     private Boolean insert;
 
+    private Tipopersonal tipopersonal;
+    private TipopersonalDAO tipopersonalDAO;
+    private List<Tipopersonal> listatipopersonal;
+
     @PostConstruct
     private void init() {
         initInstancia();
         initlistDep();
+
     }
 
     private void initInstancia() {
-        this.tipopersonal = new Tipopersonal();
         this.personal = new Personal();
+        this.personalcombos = new Personal();
+        this.tipopersonal = new Tipopersonal();
         this.personalDAO = new PersonalDAO();
         this.listapersonal = new ArrayList();
         this.insert = true;
+        this.listatipopersonal = new ArrayList();
+        this.tipopersonalDAO = new TipopersonalDAO();
     }
 
     private void initlistDep() {
     }
 
-    public String eliminarPersonal(Personal personal){
+    public String eliminarPersonal(Personal personal) {
         this.session = null;
         this.transaction = null;
         boolean respuesta;
@@ -82,8 +90,8 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
         }
         return "/MANTENIMIENTOS/FrmMantPersonal";
     }
-    
-    public void cargarCombosAutor(){
+
+    public void cargarCombosAutor() {
         this.session = null;
         this.transaction = null;
 
@@ -113,8 +121,8 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
             }
         }
     }
-    
-    public String registrarPersonal(){
+
+    public String registrarPersonal() {
         this.session = null;
         this.transaction = null;
 
@@ -130,6 +138,8 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
             } else {
                 this.personal.setIdPersonal(1);
             }
+            tipopersonal = tipopersonalDAO.BuscarTipoPersonalId(session, tipopersonal.getIdTipoPersonal());
+            this.personal.setTipopersonal(tipopersonal);
             respuesta = personalDAO.RegistrarPersonal(this.personal);
             this.transaction.commit();
 
@@ -151,44 +161,51 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
         }
         return "/MANTENIMIENTOS/FrmMantPersonal";
     }
-    
+
     public String limpiarcajas() {
-        this.personal=null;
+        this.personal = null;
         this.personalcombos = null;
         return "/MANTENIMIENTOS/FrmMantPersonal";
     }
-    
-    public List<Personal> listadoPersonal(){
+
+    public List<Personal> listadoPersonal() {
+        //System.out.println("INGRESO A LA FUNCION");
         this.session = null;
         this.transaction = null;
+
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = this.session.beginTransaction();
-            
+
             this.listapersonal = personalDAO.ListadoPersonalTodos(this.session);
             this.transaction.commit();
             return this.listapersonal;
+
+//            System.out.println(listaTEmpresa.size());
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
             if (this.transaction != null) {
                 this.transaction.rollback();
             }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
+
             return null;
         } finally {
             if (this.session != null) {
+
                 this.session.close();
+
             }
         }
     }
-    
-    public String actualizarPersonal(){
+
+    public String actualizarPersonal() {
         this.session = null;
         this.transaction = null;
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.transaction = this.session.beginTransaction();
-            
+
             personalDAO.ActualizarPersonal(session, this.personal);
             this.transaction.commit();
 
@@ -258,6 +275,21 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable{
     public void setTipopersonal(Tipopersonal tipopersonal) {
         this.tipopersonal = tipopersonal;
     }
-    
-    
+
+    public TipopersonalDAO getTipopersonalDAO() {
+        return tipopersonalDAO;
+    }
+
+    public void setTipopersonalDAO(TipopersonalDAO tipopersonalDAO) {
+        this.tipopersonalDAO = tipopersonalDAO;
+    }
+
+    public List<Tipopersonal> getListatipopersonal() {
+        return listatipopersonal;
+    }
+
+    public void setListatipopersonal(List<Tipopersonal> listatipopersonal) {
+        this.listatipopersonal = listatipopersonal;
+    }
+
 }

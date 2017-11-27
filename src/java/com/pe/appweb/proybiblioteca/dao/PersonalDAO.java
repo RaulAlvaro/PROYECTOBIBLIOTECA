@@ -39,7 +39,7 @@ public class PersonalDAO implements PersonalService{
 
     @Override
     public List<Personal> ListadoPersonalTodos(Session session) {
-        String hql = " from personal";
+        String hql = " from Personal";
         Query query = session.createQuery(hql);
         List<Personal> listapersonal = (List<Personal>) query.list();
         //System.out.println("Total es: "+listaTCP.size());
@@ -60,7 +60,7 @@ public class PersonalDAO implements PersonalService{
 
     @Override
     public Integer ContadorRegistroPersonal(Session session) {
-        String hql = "select count(*) from personal";
+        String hql = "select count(*) from Personal";
         Query query = session.createQuery(hql);
         Long FilasTab = (Long) query.uniqueResult();
         Integer cont = FilasTab.intValue();

@@ -78,4 +78,11 @@ public class TipopersonalDAO implements TipoPersonalService{
         }
         return resp;
     }
+
+    @Override
+    public Tipopersonal BuscarTipoPersonalId(Session session, int idTipopersonal) {
+        return (Tipopersonal) session.get(Tipopersonal.class, idTipopersonal);
+    }
+    
+    
 }
