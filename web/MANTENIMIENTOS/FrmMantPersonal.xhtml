@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--<h:outputStylesheet library="css" name="default.css"/>-->
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </h:head>
+    <body>
+
+        <ui:composition template="./../templates/layout.xhtml">
+            <ui:define name="content">
+                <div align="center" >
+                    <h:form id="form1">                    
+                        <p:growl id="growl" showDetail="true" sticky="false"/>                                                         
+                        <p:panel style="margin-top:2%;width: 920px;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="8">
+                                        <h:outputText value="MANTENIMIENTO DE PERSONAL" style="font-size: 15px;text-decoration: underline"/>
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:panelGrid  id="panelinfoemp" styleClass="companyHeaderGrid" style="margin-top:5px; margin-left: 5px;font-size: 11px">
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Nombre :" for="nombrepersonal" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="nombrepersonal" value="#{mantPersonalMBR.personal.nombre}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Apellido :" for="apellidopersonal" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="apellidopersonal" value="#{mantPersonalMBR.personal.apellido}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Telefono :" for="telefonopersonal" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="telefonopersonal" value="#{mantPersonalMBR.personal.telefono}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Correo :" for="correopersonal" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="correopersonal" value="#{mantPersonalMBR.personal.correo}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Sexo :" for="console" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="console" value="#{mantPersonalMBR.personal.sexo}" style="width:125px">
+                                            <f:selectItem itemLabel="Seleccionar sexo" itemValue="" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                            <f:selectItem itemLabel="Femenino" itemValue="F" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Tipo :" for="idPersonal" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="idPersonal" value="#{mantTipopersonalMBR.listatipopersonal}" style="font-family: arial;width: 180px">                                        
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
+                                            <f:selectItems value="#{mantPersonalMBR.tipopersonal}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idtipopersonal}"/> 
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    
+                                </p:row>
+                                
+
+                            </p:panelGrid>
+                        </p:panel>
+                        
+                        <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%">
+                            <p:commandButton immediate="true" value="Nuevo Registro" action="#{mantPersonalMBR.limpiarcajas()}" update=":form1,:frmListaTAutor" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{mantPersonalMBR.insert}" value="Grabar Registro" action="#{mantPersonalMBR.registrarPersonal()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{not mantPersonalMBR.insert}" value="Actualizar Registro" action="#{mantPersonalMBR.actualizarPersonal()}" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
+                        </h:panelGrid>
+                        
+
+                    </h:form>
+                    
+                    <h:form id="frmListaTAutor">
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        <p:panel style="width: 750px" id="paneltable">
+                            <p:dataTable rowKey="#{item.idPersonal}" id="tablaListaTAutor" var="item" value="#{mantPersonalMBR.listadoPersonal()}" scrollable="true" scrollHeight="150"  
+                                         style="width: 720px" selection="#{mantPersonalMBR.personalcombos}" selectionMode="single" 
+                                         emptyMessage="No se encontro información">
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantTipoMBR.cargarCombosAutor()}" />
+
+                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idPersonal}" filterStyle="width: 35%">
+                                    <h:outputText value="#{item.idPersonal}"/>
+                                </p:column>
+                                <p:column headerText="Nombre" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.nombre}">
+                                    <h:outputText value=" #{item.nombre}"/>
+                                </p:column>
+                                <p:column headerText="Apellido" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.apellido}">
+                                    <h:outputText value=" #{item.apellido}"/>
+                                </p:column>
+                                <p:column headerText="Telefono" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.telefono}">
+                                    <h:outputText value=" #{item.telefono}"/>
+                                </p:column>
+                                <p:column headerText="Correo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.correo}">
+                                    <h:outputText value=" #{item.correo}"/>
+                                </p:column>
+                                <p:column headerText="Sexo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.sexo}">
+                                    <h:outputText value=" #{item.sexo}"/>
+                                </p:column>
+                                <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipopersonal}">
+                                    <h:outputText value=" #{item.tipopersonal}"/>
+                                </p:column>
+                                <p:column style="width: 15%; padding-left: 2.5em">
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantPersonalMBR.eliminarPersonal(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </h:form>
+                    
+                </div>
+            </ui:define>
+            <ui:define name="left">
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

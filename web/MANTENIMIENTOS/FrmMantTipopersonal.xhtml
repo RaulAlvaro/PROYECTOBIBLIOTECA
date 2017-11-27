@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--<h:outputStylesheet library="css" name="default.css"/>-->
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </h:head>
+    <body>
+
+        <ui:composition template="./../templates/layout.xhtml">
+            <ui:define name="content">
+                <div align="center" >
+                    <h:form id="form1">                    
+                        <p:growl id="growl" showDetail="true" sticky="false"/>                                                         
+                        <p:panel style="margin-top:2%;width: 920px;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="8">
+                                        <h:outputText value="MANTENIMIENTO DE TIPO PERSONAL" style="font-size: 15px;text-decoration: underline"/>
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:panelGrid  id="panelinfoemp" styleClass="companyHeaderGrid" style="margin-top:5px; margin-left: 5px;font-size: 11px">
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Nombre :" for="nombretipo" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="nombretipo" value="#{mantTipopersonalMBR.tipopersonal.nombre}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+                        </p:panel>
+                        
+                        <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%">
+                            <p:commandButton immediate="true" value="Nuevo Registro" action="#{mantTipopersonalMBR.limpiarcajas()}" update=":form1,:frmListaTAutor" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{mantTipopersonalMBR.insert}" value="Grabar Registro" action="#{mantTipopersonalMBR.registrarTipopersonal()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{not mantTipopersonalMBR.insert}" value="Actualizar Registro" action="#{mantTipopersonalMBR.actualizarTipopersonal()}" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
+                        </h:panelGrid>
+                        
+
+                    </h:form>
+                    
+                    <h:form id="frmListaTAutor">
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        <p:panel style="width: 750px" id="paneltable">
+                            <p:dataTable rowKey="#{item.idTipoPersonal}" id="tablaListaTAutor" var="item" value="#{mantTipopersonalMBR.listadoTipopersonal()}" scrollable="true" scrollHeight="150"  
+                                         style="width: 720px" selection="#{mantTipopersonalMBR.tipopersonalcombos}" selectionMode="single" 
+                                         emptyMessage="No se encontro información">
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantTipopersonalMBR.cargarCombosAutor()}" />
+
+                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idTipoPersonal}" filterStyle="width: 35%">
+                                    <h:outputText value="#{item.idTipoPersonal}"/>
+                                </p:column>
+                                <p:column headerText="Nombre" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.nombre}">
+                                    <h:outputText value=" #{item.nombre}"/>
+                                </p:column>
+                                <p:column style="width: 15%; padding-left: 2.5em">
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantTipopersonalMBR.eliminarTipopersonal(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </h:form>
+                    
+                </div>
+            </ui:define>
+            <ui:define name="left">
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
