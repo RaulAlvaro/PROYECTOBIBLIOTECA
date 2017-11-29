@@ -1,5 +1,5 @@
 package com.pe.appweb.proybiblioteca.entidades;
-// Generated 25/11/2017 05:12:29 PM by Hibernate Tools 4.3.1
+// Generated 29/11/2017 02:28:28 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

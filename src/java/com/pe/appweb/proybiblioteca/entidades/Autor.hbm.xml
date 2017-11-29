@@ -1,29 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25/11/2017 05:12:30 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 02:28:28 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bdbiblioteca" name="com.pe.appweb.proybiblioteca.entidades.Autor" optimistic-lock="version" table="autor">
-    <id name="idAutor" type="int">
-      <column name="idAutor"/>
-      <generator class="assigned"/>
-    </id>
-    <property name="nombre" type="string">
-      <column length="45" name="nombre" not-null="true"/>
-    </property>
-    <property name="apellido" type="string">
-      <column length="45" name="apellido" not-null="true"/>
-    </property>
-    <property name="nacionalidad" type="string">
-      <column length="20" name="nacionalidad" not-null="true"/>
-    </property>
-    <property name="sexo" type="string">
-      <column length="1" name="sexo"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="libroporautors" table="libroporautor">
-      <key>
-        <column name="autor_idAutor" not-null="true"/>
-      </key>
-      <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Libroporautor"/>
-    </set>
-  </class>
+    <class name="com.pe.appweb.proybiblioteca.entidades.Autor" table="autor" catalog="bdbiblioteca" optimistic-lock="version">
+        <id name="idAutor" type="int">
+            <column name="idAutor" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="45" not-null="true" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="nacionalidad" length="20" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="1" />
+        </property>
+        <set name="libroporautors" table="libroporautor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor_idAutor" not-null="true" />
+            </key>
+            <one-to-many class="com.pe.appweb.proybiblioteca.entidades.Libroporautor" />
+        </set>
+    </class>
 </hibernate-mapping>

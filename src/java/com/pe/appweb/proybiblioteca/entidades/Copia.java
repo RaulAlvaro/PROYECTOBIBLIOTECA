@@ -1,5 +1,5 @@
 package com.pe.appweb.proybiblioteca.entidades;
-// Generated 25/11/2017 05:12:29 PM by Hibernate Tools 4.3.1
+// Generated 29/11/2017 02:28:28 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 public class Copia  implements java.io.Serializable {
 
 
-     private int idCopia;
+     private String idCopia;
      private Libro libro;
      private boolean estado;
      private Set prestamos = new HashSet(0);
@@ -20,23 +20,23 @@ public class Copia  implements java.io.Serializable {
     }
 
 	
-    public Copia(int idCopia, Libro libro, boolean estado) {
+    public Copia(String idCopia, Libro libro, boolean estado) {
         this.idCopia = idCopia;
         this.libro = libro;
         this.estado = estado;
     }
-    public Copia(int idCopia, Libro libro, boolean estado, Set prestamos) {
+    public Copia(String idCopia, Libro libro, boolean estado, Set prestamos) {
        this.idCopia = idCopia;
        this.libro = libro;
        this.estado = estado;
        this.prestamos = prestamos;
     }
    
-    public int getIdCopia() {
+    public String getIdCopia() {
         return this.idCopia;
     }
     
-    public void setIdCopia(int idCopia) {
+    public void setIdCopia(String idCopia) {
         this.idCopia = idCopia;
     }
     public Libro getLibro() {

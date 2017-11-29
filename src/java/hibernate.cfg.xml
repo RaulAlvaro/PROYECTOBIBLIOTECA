@@ -45,16 +45,16 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bdbiblioteca</property>
     <property name="hibernate.connection.username">root</property>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Autor.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Lector.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Prestamo.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Libro.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Libroporautor.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Tipopersonal.hbm.xml"/>
-    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Copia.hbm.xml"/>
     <mapping resource="com/pe/appweb/proybiblioteca/entidades/Usuario.hbm.xml"/>
     <mapping resource="com/pe/appweb/proybiblioteca/entidades/Personal.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Lector.hbm.xml"/>
     <mapping resource="com/pe/appweb/proybiblioteca/entidades/Multa.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Tipopersonal.hbm.xml"/>
     <mapping resource="com/pe/appweb/proybiblioteca/entidades/Tipo.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Copia.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Libroporautor.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Autor.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Libro.hbm.xml"/>
+    <mapping resource="com/pe/appweb/proybiblioteca/entidades/Prestamo.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

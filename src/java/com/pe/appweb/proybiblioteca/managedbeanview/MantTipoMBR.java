@@ -49,8 +49,38 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
     }
 
     private void initlistDep() {
+        listadoTipo();
     }
-
+    
+    public String buscaTipoxId(int id){
+        
+        this.session=null;
+        this.transaction=null;
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.transaction = session.beginTransaction();              
+            
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Tipo buscatipo = new Tipo();
+            buscatipo = this.tipoDAO.ListadoTipoId(session, id);
+            String nombretipo = buscatipo.getTipo();
+            this.transaction.commit();
+            return nombretipo;
+        } catch (Exception e) {
+//            System.out.println("ERROR :"+e.getMessage());
+            if (this.transaction!=null){    
+                transaction.rollback();
+            }
+            return null;
+        }finally{
+            if (this.session!=null){
+                this.session.close();
+            }
+        }
+    }
+    
+    
+    
     public String eliminarTipo(Tipo tipo){
         this.session = null;
         this.transaction = null;
@@ -150,7 +180,7 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
         return "/MANTENIMIENTOS/FrmMantTipo";
     }
     
-    public List<Tipo> listadoTipo(){
+    public void listadoTipo(){
         this.session = null;
         this.transaction = null;
         try {
@@ -159,14 +189,14 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
             
             this.listatipo = tipoDAO.ListadoTipoTodos(this.session);
             this.transaction.commit();
-            return this.listatipo;
+            //return this.listatipo;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
             if (this.transaction != null) {
                 this.transaction.rollback();
             }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-            return null;
+            //return null;
         } finally {
             if (this.session != null) {
                 this.session.close();

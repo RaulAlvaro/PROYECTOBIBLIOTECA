@@ -14,9 +14,12 @@ import org.hibernate.Session;
  * @author RAUL
  */
 public interface LibroService {
-    //public abstract boolean RegistroLibro(Libro libro);
-    //public abstract List<Libro> ListadoLibrosTodos();
+    public abstract boolean RegistroLibro(Libro libro);
+    public abstract List<Libro> ListadoLibrosTodos(Session session);
     public abstract Libro ListadoLibroId(Session session,int id);
-    //public abstract boolean ActualizarLibro(Libro libro);
-    //public abstract boolean EliminarLibro(Libro libro);
+    public abstract boolean ActualizarLibro(Session session, Libro libro);
+    public abstract boolean EliminarLibro(Session session, Libro libro);
+    public abstract Integer ContadorRegistroLibro(Session session);
+
+    
 }

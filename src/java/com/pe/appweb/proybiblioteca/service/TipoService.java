@@ -16,6 +16,7 @@ import org.hibernate.Session;
 public interface TipoService {
     
     public abstract boolean RegistrarTipo(Tipo tipo);
+    public abstract Tipo ListadoTipoId(Session session,int idTipo);
     public abstract List<Tipo> ListadoTipoTodos(Session session);
     public abstract boolean ActualizarTipo(Session session, Tipo tipo);
     public abstract Integer ContadorRegistroTipo(Session session);

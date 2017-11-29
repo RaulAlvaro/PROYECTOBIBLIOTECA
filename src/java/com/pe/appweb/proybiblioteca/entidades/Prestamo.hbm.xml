@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25/11/2017 05:12:30 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/11/2017 02:28:28 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="bdbiblioteca" name="com.pe.appweb.proybiblioteca.entidades.Prestamo" optimistic-lock="version" table="prestamo">
-    <id name="idPrestamo" type="int">
-      <column name="idPrestamo"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.pe.appweb.proybiblioteca.entidades.Copia" fetch="select" name="copia">
-      <column name="copia_idCopia" not-null="true"/>
-    </many-to-one>
-    <many-to-one class="com.pe.appweb.proybiblioteca.entidades.Lector" fetch="select" name="lector">
-      <column name="lector_codigo" not-null="true"/>
-    </many-to-one>
-    <many-to-one class="com.pe.appweb.proybiblioteca.entidades.Personal" fetch="select" name="personal">
-      <column name="personal_idPersonal" not-null="true"/>
-    </many-to-one>
-    <property name="inicio" type="date">
-      <column length="10" name="inicio" not-null="true"/>
-    </property>
-    <property name="fin" type="date">
-      <column length="10" name="fin" not-null="true"/>
-    </property>
-  </class>
+    <class name="com.pe.appweb.proybiblioteca.entidades.Prestamo" table="prestamo" catalog="bdbiblioteca" optimistic-lock="version">
+        <id name="idPrestamo" type="int">
+            <column name="idPrestamo" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="copia" class="com.pe.appweb.proybiblioteca.entidades.Copia" fetch="select">
+            <column name="copia_idCopia" length="6" not-null="true" />
+        </many-to-one>
+        <many-to-one name="lector" class="com.pe.appweb.proybiblioteca.entidades.Lector" fetch="select">
+            <column name="lector_codigo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="personal" class="com.pe.appweb.proybiblioteca.entidades.Personal" fetch="select">
+            <column name="personal_idPersonal" not-null="true" />
+        </many-to-one>
+        <property name="inicio" type="date">
+            <column name="inicio" length="10" not-null="true" />
+        </property>
+        <property name="fin" type="date">
+            <column name="fin" length="10" not-null="true" />
+        </property>
+    </class>
 </hibernate-mapping>

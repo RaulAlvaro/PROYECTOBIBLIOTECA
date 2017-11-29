@@ -20,7 +20,12 @@ import org.hibernate.Transaction;
 public class TipoDAO implements TipoService {
 
     private Session session;
-
+    
+    @Override
+    public Tipo ListadoTipoId(Session session, int idTipo) {
+        return (Tipo) session.get(Tipo.class, idTipo);
+    }
+    
     @Override
     public boolean RegistrarTipo(Tipo tipo) {
         boolean resp = false;
@@ -78,5 +83,6 @@ public class TipoDAO implements TipoService {
         }
         return resp;
     }
+
 
 }

@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--<h:outputStylesheet library="css" name="default.css"/>-->
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </h:head>
+    <body>
+
+        <ui:composition template="./../templates/layout.xhtml">
+            <ui:define name="content">
+                <div align="center" >
+                    <h:form id="form1">                    
+                        <p:growl id="growl" showDetail="true" sticky="false"/>                                                         
+                        <p:panel style="margin-top:2%;width: 920px;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="8">
+                                        <h:outputText value="MANTENIMIENTO DE LIBRO POR AUTOR" style="font-size: 15px;text-decoration: underline"/>
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:panelGrid  id="panelinfoemp" styleClass="companyHeaderGrid" style="margin-top:5px; margin-left: 5px;font-size: 11px">
+                                
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Libro :" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="idtipo" value="#{mantLibroPorAutor.idLibro}" style="font-family: arial;width: 180px">                                        
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
+                                            <f:selectItems value="#{mantLibroMBR.listalibros}" var="idet" itemLabel="#{idet.titulo}" itemValue="#{idet.idLibro}"/> 
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Autor :" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="idtipo2" value="#{mantLibroPorAutor.idAutor}" style="font-family: arial;width: 180px">                                        
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
+                                            <f:selectItems value="#{mantAutorMBR.listadoautor()}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idAutor}"/> 
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:panel>
+                        
+                        <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%">
+                            <p:commandButton immediate="true" value="Nuevo Registro" action="#{mantLibroPorAutor.limpiarcajas()}" update=":form1,:frmListaTAutor" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{mantLibroPorAutor.insert}" value="Grabar Registro" action="#{mantLibroPorAutor.registrarLibroPorAutor()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{not mantLibroPorAutor.insert}" value="Actualizar Registro" action="#" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
+                        </h:panelGrid>
+                        
+
+                    </h:form>
+                    
+                    <h:form id="frmListaTAutor">
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        <p:panel style="width: 750px" id="paneltable">
+                            <p:dataTable rowKey="#{item.idLibro}" id="tablaListaTAutor" var="item" value="#{mantLibroMBR.listalibros}" scrollable="true" scrollHeight="150"  
+                                         style="width: 720px" selection="#{mantLibroMBR.librocombos}" selectionMode="single" 
+                                         emptyMessage="No se encontro información">
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantLibroMBR.cargarCombosLibro()}" />
+
+                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idTipo}" filterStyle="width: 35%">
+                                    <h:outputText value="#{item.idLibro}"/>
+                                </p:column>
+                                <p:column headerText="Titulo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
+                                    <h:outputText value=" #{item.titulo}"/>
+                                </p:column>
+                                <p:column headerText="Edicion" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
+                                    <h:outputText value=" #{item.edicion}"/>
+                                </p:column>
+                                
+                                <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
+                                    <h:outputText value=" #{mantTipoMBR.buscaTipoxId(item.tipo.idTipo)}"/>
+                                </p:column>
+                                <p:column style="width: 15%; padding-left: 2.5em">
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantLibroMBR.eliminarLibro(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </h:form>
+                    
+                </div>
+            </ui:define>
+            <ui:define name="left">
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

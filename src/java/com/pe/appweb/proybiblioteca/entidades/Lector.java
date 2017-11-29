@@ -1,5 +1,5 @@
 package com.pe.appweb.proybiblioteca.entidades;
-// Generated 25/11/2017 05:12:29 PM by Hibernate Tools 4.3.1
+// Generated 29/11/2017 02:28:28 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -18,7 +18,6 @@ public class Lector  implements java.io.Serializable {
      private String sexo;
      private boolean estado;
      private int strikes;
-     private String lectorcol;
      private Set prestamos = new HashSet(0);
      private Set multas = new HashSet(0);
 
@@ -26,16 +25,15 @@ public class Lector  implements java.io.Serializable {
     }
 
 	
-    public Lector(int codigo, String nombres, String apellidos, int telefono, boolean estado, int strikes, String lectorcol) {
+    public Lector(int codigo, String nombres, String apellidos, int telefono, boolean estado, int strikes) {
         this.codigo = codigo;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.estado = estado;
         this.strikes = strikes;
-        this.lectorcol = lectorcol;
     }
-    public Lector(int codigo, String nombres, String apellidos, int telefono, String sexo, boolean estado, int strikes, String lectorcol, Set prestamos, Set multas) {
+    public Lector(int codigo, String nombres, String apellidos, int telefono, String sexo, boolean estado, int strikes, Set prestamos, Set multas) {
        this.codigo = codigo;
        this.nombres = nombres;
        this.apellidos = apellidos;
@@ -43,7 +41,6 @@ public class Lector  implements java.io.Serializable {
        this.sexo = sexo;
        this.estado = estado;
        this.strikes = strikes;
-       this.lectorcol = lectorcol;
        this.prestamos = prestamos;
        this.multas = multas;
     }
@@ -96,13 +93,6 @@ public class Lector  implements java.io.Serializable {
     
     public void setStrikes(int strikes) {
         this.strikes = strikes;
-    }
-    public String getLectorcol() {
-        return this.lectorcol;
-    }
-    
-    public void setLectorcol(String lectorcol) {
-        this.lectorcol = lectorcol;
     }
     public Set getPrestamos() {
         return this.prestamos;
