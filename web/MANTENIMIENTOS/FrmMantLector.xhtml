@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!--<h:outputStylesheet library="css" name="default.css"/>-->
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    </h:head>
+    <body>
+
+        <ui:composition template="./../templates/layout.xhtml">
+            <ui:define name="content">
+                <div align="center" >
+                    <h:form id="form1">                    
+                        <p:growl id="growl" showDetail="true" sticky="false"/>                                                         
+                        <p:panel style="margin-top:2%;width: 920px;">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column colspan="8">
+                                        <h:outputText value="MANTENIMIENTO DE LECTOR" style="font-size: 15px;text-decoration: underline"/>
+                                    </p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:panelGrid  id="panelinfoemp" styleClass="companyHeaderGrid" style="margin-top:5px; margin-left: 5px;font-size: 11px">
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Nombre :" for="nombrelector" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="nombrelector" value="#{mantLectorMBR.lector.nombres}"
+                                                     style="font-family: arial;">
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column style="text-align: right" colspan="2">
+                                        <p:outputLabel  value="Apellidos :" for="apellidoslector" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="apellidoslector" value="#{mantLectorMBR.lector.apellidos}"
+                                                     style="font-family: arial">
+                                        </p:inputText>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right" >
+                                        <p:outputLabel  value="Telefono :" for="telefonoautor" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:inputText size="20" maxlength="20" id="telefonoautor" value="#{mantLectorMBR.lector.telefono}"
+                                                     style="font-family: arial">
+                                        </p:inputText>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Sexo :" for="console" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="console" value="#{mantLectorMBR.lector.sexo}" style="width:125px">
+                                            <f:selectItem itemLabel="Seleccionar sexo" itemValue="" />
+                                            <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                            <f:selectItem itemLabel="Femenino" itemValue="F" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Estado :" for="estadolector" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="estadolector" value="#{mantLectorMBR.lector.estado}" style="width:125px">
+                                            <f:selectItem itemLabel="Seleccionar estado" itemValue="" />
+                                            <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align: right">
+                                        <p:outputLabel  value="Strikes :" for="strikeslector" style="font-family: arial"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:selectOneMenu id="strikeslector" value="#{mantLectorMBR.lector.strikes}" style="width:125px">
+                                            <f:selectItem itemLabel="Seleccionar strikes" itemValue="" />
+                                            <f:selectItem itemLabel="0" itemValue="0" />
+                                            <f:selectItem itemLabel="1" itemValue="1" />
+                                            <f:selectItem itemLabel="2" itemValue="2" />
+                                            <f:selectItem itemLabel="3" itemValue="3" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+                        </p:panel>
+                        <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%">
+                            <p:commandButton immediate="true" value="Nuevo Registro" action="#{mantLectorMBR.limpiarcajas()}" update=":form1,:frmListaTAutor" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{mantLectorMBR.insert}" value="Grabar Registro" action="#{mantLectorMBR.registrarLector()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{not mantLectorMBR.insert}" value="Actualizar Registro" action="#{mantLectorMBR.actualizarLector()}" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
+                        </h:panelGrid>
+
+
+                    </h:form>
+
+                    <h:form id="frmListaTAutor">
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        <p:panel style="width: 750px" id="paneltable">
+                            <p:dataTable rowKey="#{item.codigo}" id="tablaListaTAutor" var="item" value="#{mantLectorMBR.listadolector()}" scrollable="true" scrollHeight="150"  
+                                         style="width: 720px" selection="#{mantLectorMBR.lectorcombos}" selectionMode="single" 
+                                         emptyMessage="No se encontro información">
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantLectorMBR.cargarCombos()}" />
+
+                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.codigo}" filterStyle="width: 35%">
+                                    <h:outputText value="#{item.codigo}"/>
+                                </p:column>
+                                <p:column headerText="Nombre" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.nombres}">
+                                    <h:outputText value=" #{item.nombres}"/>
+                                </p:column>
+                                <p:column headerText="Apellidos" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.apellidos}" >
+                                    <h:outputText value="#{item.apellidos}"/>
+                                </p:column>
+                                <p:column headerText="Nacionalidad" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.telefono}" >
+                                    <h:outputText value="#{item.telefono}"/>
+                                </p:column>
+                                <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.estado}" >
+                                    <h:outputText value="#{item.estado}"/>
+                                </p:column>
+                                <p:column headerText="Strikes" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.strikes}" >
+                                    <h:outputText value="#{item.strikes}"/>
+                                </p:column>
+                                <p:column style="width: 15%; padding-left: 2.5em">
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantLectorMBR.eliminarLector(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </h:form>
+                </div>
+            </ui:define>
+            <ui:define name="left">
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
