@@ -57,8 +57,10 @@ public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
         libroporautor = new Libroporautor();
         libroporautorDAO = new LibroporautorDAO();
         
-        libro = new Libro();
+        libroDAO = new LibroDAO();
+        autorDAO = new AutorDAO();
         
+        libro = new Libro();
         autor = new Autor();
         this.insert = true;
     }
@@ -90,9 +92,9 @@ public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
             this.transaction.commit();
 
             if (respuesta) {
-                messageInfo("Se realizo la creación del Autor");
+                messageInfo("Se realizo la creación del Libro por Autor");
             } else {
-                messageError("NO Se realizo la creación del Autor");
+                messageError("NO Se realizo la creación del Libro por Autor");
             }
         } catch (Exception ex) {
             if (this.transaction != null) {

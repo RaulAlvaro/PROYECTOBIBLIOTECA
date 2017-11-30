@@ -53,7 +53,7 @@
                     <h:form id="frmListaTAutor">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
                         <p:panel style="width: 750px" id="paneltable">
-                            <p:dataTable rowKey="#{item.idTipo}" id="tablaListaTAutor" var="item" value="#{mantTipoMBR.listadoTipo()}" scrollable="true" scrollHeight="150"  
+                            <p:dataTable rowKey="#{item.idTipo}" id="tablaListaTAutor" var="item" value="#{mantTipoMBR.listatipo}" scrollable="true" scrollHeight="150"  
                                          style="width: 720px" selection="#{mantTipoMBR.tipocombos}" selectionMode="single" 
                                          emptyMessage="No se encontro información">
                                 <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantTipoMBR.cargarCombosAutor()}" />
