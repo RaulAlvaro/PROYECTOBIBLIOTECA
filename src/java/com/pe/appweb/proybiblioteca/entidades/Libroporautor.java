@@ -10,39 +10,37 @@ public class Libroporautor  implements java.io.Serializable {
 
 
      private int idLibroPorAutor;
-     private Autor autor;
-     private Libro libro;
+     private int idAutor;
+     private int idLibro;
 
     public Libroporautor() {
     }
 
-    public Libroporautor(int idLibroPorAutor, Autor autor, Libro libro) {
-       this.idLibroPorAutor = idLibroPorAutor;
-       this.autor = autor;
-       this.libro = libro;
-    }
-   
     public int getIdLibroPorAutor() {
-        return this.idLibroPorAutor;
+        return idLibroPorAutor;
     }
-    
+
     public void setIdLibroPorAutor(int idLibroPorAutor) {
         this.idLibroPorAutor = idLibroPorAutor;
     }
-    public Autor getAutor() {
-        return this.autor;
+
+    public int getIdAutor() {
+        return idAutor;
+    }
+
+    public void setIdAutor(int idAutor) {
+        this.idAutor = idAutor;
+    }
+
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
     }
     
-    public void setAutor(Autor autor) {
-        this.autor = autor;
-    }
-    public Libro getLibro() {
-        return this.libro;
-    }
     
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
 
 
 

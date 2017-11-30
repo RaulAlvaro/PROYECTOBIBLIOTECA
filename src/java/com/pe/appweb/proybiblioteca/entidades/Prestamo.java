@@ -9,69 +9,105 @@ import java.util.Date;
  */
 public class Prestamo  implements java.io.Serializable {
 
-
      private int idPrestamo;
-     private Copia copia;
-     private Lector lector;
-     private Personal personal;
      private Date inicio;
      private Date fin;
-
+     private int idLector;
+     private int idPersonal;
+     private int idCopia;
+     private boolean devuelto;
+     private boolean agregado;
+     private int idMulta;
+     
     public Prestamo() {
     }
 
-    public Prestamo(int idPrestamo, Copia copia, Lector lector, Personal personal, Date inicio, Date fin) {
-       this.idPrestamo = idPrestamo;
-       this.copia = copia;
-       this.lector = lector;
-       this.personal = personal;
-       this.inicio = inicio;
-       this.fin = fin;
+    public Prestamo(int idPrestamo, Date inicio, Date fin, int idLector, int idPersonal, int idCopia, boolean devuelto, boolean agregado, int idMulta) {
+        this.idPrestamo = idPrestamo;
+        this.inicio = inicio;
+        this.fin = fin;
+        this.idLector = idLector;
+        this.idPersonal = idPersonal;
+        this.idCopia = idCopia;
+        this.devuelto = devuelto;
+        this.agregado = agregado;
+        this.idMulta = idMulta;
     }
-   
+
     public int getIdPrestamo() {
-        return this.idPrestamo;
+        return idPrestamo;
     }
-    
+
     public void setIdPrestamo(int idPrestamo) {
         this.idPrestamo = idPrestamo;
     }
-    public Copia getCopia() {
-        return this.copia;
-    }
-    
-    public void setCopia(Copia copia) {
-        this.copia = copia;
-    }
-    public Lector getLector() {
-        return this.lector;
-    }
-    
-    public void setLector(Lector lector) {
-        this.lector = lector;
-    }
-    public Personal getPersonal() {
-        return this.personal;
-    }
-    
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
-    }
+
     public Date getInicio() {
-        return this.inicio;
+        return inicio;
     }
-    
+
     public void setInicio(Date inicio) {
         this.inicio = inicio;
     }
+
     public Date getFin() {
-        return this.fin;
+        return fin;
     }
-    
+
     public void setFin(Date fin) {
         this.fin = fin;
     }
 
+    public int getIdLector() {
+        return idLector;
+    }
+
+    public void setIdLector(int idLector) {
+        this.idLector = idLector;
+    }
+
+    public int getIdPersonal() {
+        return idPersonal;
+    }
+
+    public void setIdPersonal(int idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+
+    public int getIdCopia() {
+        return idCopia;
+    }
+
+    public void setIdCopia(int idCopia) {
+        this.idCopia = idCopia;
+    }
+
+    public boolean isDevuelto() {
+        return devuelto;
+    }
+
+    public void setDevuelto(boolean devuelto) {
+        this.devuelto = devuelto;
+    }
+
+    public boolean isAgregado() {
+        return agregado;
+    }
+
+    public void setAgregado(boolean agregado) {
+        this.agregado = agregado;
+    }
+
+    public int getIdMulta() {
+        return idMulta;
+    }
+
+    public void setIdMulta(int idMulta) {
+        this.idMulta = idMulta;
+    }
+    
+    
+    
 
 
 

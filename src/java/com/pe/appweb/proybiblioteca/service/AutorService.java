@@ -7,17 +7,18 @@ package com.pe.appweb.proybiblioteca.service;
 
 import com.pe.appweb.proybiblioteca.entidades.Autor;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  *
  * @author RAUL
  */
 public interface AutorService {
+    /*
     public abstract boolean RegistrarAutor(Autor autor);
     public abstract List<Autor> ListadoAutorTodos(Session session);
     public abstract Autor ListadoAutorId(Session session,int idAutor);
     public abstract boolean ActualizarAutor(Session session, Autor autor);
     public abstract Integer ContadorRegistroAutor(Session session);
     public abstract boolean EliminarAutorID(Session session, Autor idAutor);
+    */
 }

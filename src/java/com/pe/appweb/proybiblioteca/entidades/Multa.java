@@ -9,9 +9,7 @@ import java.util.Date;
  */
 public class Multa  implements java.io.Serializable {
 
-
      private int idMulta;
-     private Lector lector;
      private Date inicio;
      private Date fin;
      private int monto;
@@ -19,50 +17,46 @@ public class Multa  implements java.io.Serializable {
     public Multa() {
     }
 
-    public Multa(int idMulta, Lector lector, Date inicio, Date fin, int monto) {
-       this.idMulta = idMulta;
-       this.lector = lector;
-       this.inicio = inicio;
-       this.fin = fin;
-       this.monto = monto;
+    public Multa(int idMulta, Date inicio, Date fin, int monto) {
+        this.idMulta = idMulta;
+        this.inicio = inicio;
+        this.fin = fin;
+        this.monto = monto;
     }
-   
+
     public int getIdMulta() {
-        return this.idMulta;
+        return idMulta;
     }
-    
+
     public void setIdMulta(int idMulta) {
         this.idMulta = idMulta;
     }
-    public Lector getLector() {
-        return this.lector;
-    }
-    
-    public void setLector(Lector lector) {
-        this.lector = lector;
-    }
+
     public Date getInicio() {
-        return this.inicio;
+        return inicio;
     }
-    
+
     public void setInicio(Date inicio) {
         this.inicio = inicio;
     }
+
     public Date getFin() {
-        return this.fin;
+        return fin;
     }
-    
+
     public void setFin(Date fin) {
         this.fin = fin;
     }
+
     public int getMonto() {
-        return this.monto;
+        return monto;
     }
-    
+
     public void setMonto(int monto) {
         this.monto = monto;
     }
 
+    
 
 
 

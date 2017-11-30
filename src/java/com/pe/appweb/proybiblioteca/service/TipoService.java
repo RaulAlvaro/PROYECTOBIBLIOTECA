@@ -7,7 +7,6 @@ package com.pe.appweb.proybiblioteca.service;
 
 import com.pe.appweb.proybiblioteca.entidades.Tipo;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  *
@@ -15,11 +14,10 @@ import org.hibernate.Session;
  */
 public interface TipoService {
     
-    public abstract boolean RegistrarTipo(Tipo tipo);
-    public abstract Tipo ListadoTipoId(Session session,int idTipo);
-    public abstract List<Tipo> ListadoTipoTodos(Session session);
-    public abstract boolean ActualizarTipo(Session session, Tipo tipo);
-    public abstract Integer ContadorRegistroTipo(Session session);
-    public boolean EliminarTipoId(Session session, Tipo tipo);
+    public abstract String RegistrarTipo(Tipo tipo);
+    public abstract List<Tipo> ListadoTipoTodos();
+    public abstract Tipo ListadoTipoId(int idTipo);
+    public abstract String ActualizarTipo(Tipo tipo);
+    public abstract String EliminarTipoId(Tipo tipo);
     
 }

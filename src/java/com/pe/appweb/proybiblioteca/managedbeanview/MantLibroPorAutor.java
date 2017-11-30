@@ -11,7 +11,6 @@ import com.pe.appweb.proybiblioteca.dao.LibroporautorDAO;
 import com.pe.appweb.proybiblioteca.entidades.Autor;
 import com.pe.appweb.proybiblioteca.entidades.Libro;
 import com.pe.appweb.proybiblioteca.entidades.Libroporautor;
-import com.pe.appweb.proybiblioteca.util.HibernateUtil;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,8 +18,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -29,9 +26,8 @@ import org.hibernate.Transaction;
 @ManagedBean
 @ViewScoped
 public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
-    
-    private Session session;
-    private Transaction transaction;
+
+/*
     
     private Libroporautor libroporautor;
     private LibroporautorDAO libroporautorDAO;
@@ -190,6 +186,6 @@ public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
-    
+*/
     
 }

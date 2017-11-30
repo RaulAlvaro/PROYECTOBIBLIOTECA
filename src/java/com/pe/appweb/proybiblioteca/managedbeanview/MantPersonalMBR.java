@@ -9,7 +9,6 @@ import com.pe.appweb.proybiblioteca.dao.PersonalDAO;
 import com.pe.appweb.proybiblioteca.dao.TipopersonalDAO;
 import com.pe.appweb.proybiblioteca.entidades.Personal;
 import com.pe.appweb.proybiblioteca.entidades.Tipopersonal;
-import com.pe.appweb.proybiblioteca.util.HibernateUtil;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -28,9 +25,7 @@ import org.hibernate.Transaction;
 @ViewScoped
 public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
 
-    Session session;
-    Transaction transaction;
-
+/*
     private Personal personal;
     private Personal personalcombos;
     private PersonalDAO personalDAO;
@@ -292,4 +287,6 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
         this.listatipopersonal = listatipopersonal;
     }
 
+
+*/
 }

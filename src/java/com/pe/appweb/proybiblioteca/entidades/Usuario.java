@@ -8,54 +8,53 @@ package com.pe.appweb.proybiblioteca.entidades;
  */
 public class Usuario  implements java.io.Serializable {
 
-
      private int idUsuario;
-     private Personal personal;
+     private int idPersonal;
      private String nombreusuario;
      private String claveusuario;
 
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, Personal personal, String nombreusuario, String claveusuario) {
-       this.idUsuario = idUsuario;
-       this.personal = personal;
-       this.nombreusuario = nombreusuario;
-       this.claveusuario = claveusuario;
-    }
-   
-    public int getIdUsuario() {
-        return this.idUsuario;
-    }
-    
-    public void setIdUsuario(int idUsuario) {
+    public Usuario(int idUsuario, int idPersonal, String nombreusuario, String claveusuario) {
         this.idUsuario = idUsuario;
-    }
-    public Personal getPersonal() {
-        return this.personal;
-    }
-    
-    public void setPersonal(Personal personal) {
-        this.personal = personal;
-    }
-    public String getNombreusuario() {
-        return this.nombreusuario;
-    }
-    
-    public void setNombreusuario(String nombreusuario) {
+        this.idPersonal = idPersonal;
         this.nombreusuario = nombreusuario;
-    }
-    public String getClaveusuario() {
-        return this.claveusuario;
-    }
-    
-    public void setClaveusuario(String claveusuario) {
         this.claveusuario = claveusuario;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
+    public int getIdPersonal() {
+        return idPersonal;
+    }
 
+    public void setIdPersonal(int idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+
+    public String getNombreusuario() {
+        return nombreusuario;
+    }
+
+    public void setNombreusuario(String nombreusuario) {
+        this.nombreusuario = nombreusuario;
+    }
+
+    public String getClaveusuario() {
+        return claveusuario;
+    }
+
+    public void setClaveusuario(String claveusuario) {
+        this.claveusuario = claveusuario;
+    }
+    
 }
 
 

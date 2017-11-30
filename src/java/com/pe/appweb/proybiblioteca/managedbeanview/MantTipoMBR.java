@@ -7,7 +7,6 @@ package com.pe.appweb.proybiblioteca.managedbeanview;
 
 import com.pe.appweb.proybiblioteca.dao.TipoDAO;
 import com.pe.appweb.proybiblioteca.entidades.Tipo;
-import com.pe.appweb.proybiblioteca.util.HibernateUtil;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,8 +14,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -25,10 +22,7 @@ import org.hibernate.Transaction;
 @ManagedBean
 @ViewScoped
 public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
-    
-    Session session;
-    Transaction transaction;
-    
+        
     private Tipo tipo;
     private Tipo tipocombos;
     private TipoDAO tipoDAO;
@@ -53,70 +47,32 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
     }
     
     public String buscaTipoxId(int id){
-        
-        this.session=null;
-        this.transaction=null;
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = session.beginTransaction();              
-            
             //this.musu= usudao.ListadoUsuarioxId(this.session,id);
             Tipo buscatipo = new Tipo();
-            buscatipo = this.tipoDAO.ListadoTipoId(session, id);
+            buscatipo = this.tipoDAO.ListadoTipoId(id);
             String nombretipo = buscatipo.getTipo();
-            this.transaction.commit();
-            return nombretipo;
-        } catch (Exception e) {
-//            System.out.println("ERROR :"+e.getMessage());
-            if (this.transaction!=null){    
-                transaction.rollback();
-            }
-            return null;
-        }finally{
-            if (this.session!=null){
-                this.session.close();
-            }
-        }
+            return nombretipo; 
     }
     
     
     
     public String eliminarTipo(Tipo tipo){
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
+        String respuesta;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = tipoDAO.EliminarTipoId(session, tipo);
-            this.transaction.commit();
-            if (respuesta) {
-                messageInfo("Se realizo la elminación del Autor");
+            respuesta = tipoDAO.EliminarTipoId(tipo);
+            if (respuesta.equals("correcto")) {
+                messageInfo("Se realizo la elminación del Tipo");
             } else {
-                messageError("NO Se realizo la eliminación del Autor");
+                messageError("NO Se realizo la eliminación del Tipo");
             }
-        } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
+        } catch (Exception ex) {   
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipo";
     }
     
     public void cargarCombosAutor(){
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             //CARGAR COMBOS
             this.tipo.setIdTipo(this.tipocombos.getIdTipo());
             this.tipo.setTipo(this.tipocombos.getTipo());
@@ -124,52 +80,27 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
 
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
+        } 
     }
     
     public String registrarTipo(){
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
-
-            int countReg = tipoDAO.ContadorRegistroTipo(session);
+            String respuesta;
             int idCargo = 0;
-            if (countReg != 0) {
-                this.tipo.setIdTipo(countReg + 1);
-            } else {
-                this.tipo.setIdTipo(1);
-            }
+            
+            this.tipo.setIdTipo(0);
             respuesta = tipoDAO.RegistrarTipo(this.tipo);
-            this.transaction.commit();
 
-            if (respuesta) {
+            if (respuesta.equals("Registrado")) {
                 messageInfo("Se realizo la creación del Autor");
             } else {
                 messageError("NO Se realizo la creación del Autor");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipo";
     }
@@ -181,54 +112,25 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
     }
     
     public void listadoTipo(){
-        this.session = null;
-        this.transaction = null;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            this.listatipo = tipoDAO.ListadoTipoTodos(this.session);
-            this.transaction.commit();
+            this.listatipo = tipoDAO.ListadoTipoTodos();
             //return this.listatipo;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             //return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
     }
     
     public String actualizarTipo(){
-        this.session = null;
-        this.transaction = null;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            tipoDAO.ActualizarTipo(session, this.tipo);
-            this.transaction.commit();
-
+            tipoDAO.ActualizarTipo(this.tipo);
             messageInfo("Correcto: Los cambios fueron guardados correctamente");
 
             insert = Boolean.FALSE;
 
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipo";
     }
@@ -273,9 +175,5 @@ public class MantTipoMBR extends MensajeSYSUtils implements Serializable{
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
-    
-    
-    
-    
     
 }

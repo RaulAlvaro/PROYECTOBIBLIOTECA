@@ -7,7 +7,6 @@ package com.pe.appweb.proybiblioteca.service;
 
 import com.pe.appweb.proybiblioteca.entidades.Personal;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  *
@@ -15,10 +14,10 @@ import org.hibernate.Session;
  */
 public interface PersonalService {
     
-    public abstract boolean RegistrarPersonal(Personal personal);
-    public abstract List<Personal> ListadoPersonalTodos(Session session);
-    public abstract boolean ActualizarPersonal(Session session, Personal personal);
-    public abstract Integer ContadorRegistroPersonal(Session session);
-    public boolean EliminarPersonalId(Session session, Personal personal);
+    public abstract String RegistrarPersonal(Personal personal);
+    public abstract List<Personal> ListadoPersonalTodos();
+    public abstract Personal ListadoPersonalId(int idPersonal);
+    public abstract String ActualizarPersonal(Personal personal);
+    public abstract String EliminarPersonalId(Personal personal);
     
 }

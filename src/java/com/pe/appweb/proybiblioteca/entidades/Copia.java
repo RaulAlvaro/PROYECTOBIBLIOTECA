@@ -10,59 +10,67 @@ import java.util.Set;
  */
 public class Copia  implements java.io.Serializable {
 
-
-     private String idCopia;
-     private Libro libro;
-     private boolean estado;
-     private Set prestamos = new HashSet(0);
-
+    private String idCopia;
+    private boolean estado;
+    private int idLibro;
+    private int edicion;
+    private String editorial;
+    
     public Copia() {
     }
 
-	
-    public Copia(String idCopia, Libro libro, boolean estado) {
+    public Copia(String idCopia, boolean estado, int idLibro, int edicion, String editorial) {
         this.idCopia = idCopia;
-        this.libro = libro;
         this.estado = estado;
+        this.idLibro = idLibro;
+        this.edicion = edicion;
+        this.editorial = editorial;
     }
-    public Copia(String idCopia, Libro libro, boolean estado, Set prestamos) {
-       this.idCopia = idCopia;
-       this.libro = libro;
-       this.estado = estado;
-       this.prestamos = prestamos;
-    }
-   
+
     public String getIdCopia() {
-        return this.idCopia;
+        return idCopia;
     }
-    
+
     public void setIdCopia(String idCopia) {
         this.idCopia = idCopia;
     }
-    public Libro getLibro() {
-        return this.libro;
-    }
-    
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
+
     public boolean isEstado() {
-        return this.estado;
+        return estado;
     }
-    
+
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    public Set getPrestamos() {
-        return this.prestamos;
+
+    public int getIdLibro() {
+        return idLibro;
+    }
+
+    public void setIdLibro(int idLibro) {
+        this.idLibro = idLibro;
+    }
+
+    public int getEdicion() {
+        return edicion;
+    }
+
+    public void setEdicion(int edicion) {
+        this.edicion = edicion;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
     }
     
-    public void setPrestamos(Set prestamos) {
-        this.prestamos = prestamos;
-    }
+    
+    
 
-
-
+    
 
 }
 

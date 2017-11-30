@@ -7,7 +7,6 @@ package com.pe.appweb.proybiblioteca.service;
 
 import com.pe.appweb.proybiblioteca.entidades.Tipopersonal;
 import java.util.List;
-import org.hibernate.Session;
 
 /**
  *
@@ -15,11 +14,9 @@ import org.hibernate.Session;
  */
 public interface TipoPersonalService {
     
-    public abstract boolean RegistrarTipopersonal(Tipopersonal tipo);
-    public abstract List<Tipopersonal> ListadoTipopersonalTodos(Session session);
-    public abstract boolean ActualizarTipopersonal(Session session, Tipopersonal tipo);
-    public abstract Integer ContadorRegistroTipopersonal(Session session);
-    public boolean EliminarTipopersonalId(Session session, Tipopersonal tipo);
-    public abstract Tipopersonal BuscarTipoPersonalId(Session session, int idLibro);
+    public abstract String RegistrarTipopersonal(Tipopersonal tipo);
+    public abstract List<Tipopersonal> ListadoTipopersonalTodos();
+    public abstract String ActualizarTipopersonal(Tipopersonal tipo);
+    public abstract String EliminarTipopersonalId(Tipopersonal tipo);
 
 }

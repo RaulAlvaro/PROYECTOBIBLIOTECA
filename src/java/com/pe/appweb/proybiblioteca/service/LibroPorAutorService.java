@@ -6,14 +6,12 @@
 package com.pe.appweb.proybiblioteca.service;
 
 import com.pe.appweb.proybiblioteca.entidades.Libroporautor;
-import org.hibernate.Session;
 
 /**
  *
  * @author RAUL
  */
 public interface LibroPorAutorService {
-    public boolean RegistrarLibroPorAutor(Libroporautor libroPorAutor);
-    public abstract Integer ContadorRegistroTipo(Session session);
+    public abstract String RegistrarLibroPorAutor(Libroporautor libroPorAutor);
 
 }

@@ -8,7 +8,6 @@ package com.pe.appweb.proybiblioteca.managedbeanview;
 import com.pe.appweb.proybiblioteca.dao.LibroDAO;
 import com.pe.appweb.proybiblioteca.dao.TipoDAO;
 import com.pe.appweb.proybiblioteca.entidades.Libro;
-import com.pe.appweb.proybiblioteca.util.HibernateUtil;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,8 +15,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -27,9 +24,7 @@ import org.hibernate.Transaction;
 @ViewScoped
 public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
 
-    Session session;
-    Transaction transaction;
-
+/*
     private Libro libro;
     private Libro librocombos;
     private LibroDAO libroDAO;
@@ -271,7 +266,7 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
         this.idTipo = idTipo;
     }
     
-    
+    */
     
 
 }

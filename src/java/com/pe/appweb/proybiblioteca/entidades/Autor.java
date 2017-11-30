@@ -10,31 +10,21 @@ import java.util.Set;
  */
 public class Autor  implements java.io.Serializable {
 
-
      private int idAutor;
      private String nombre;
      private String apellido;
      private String nacionalidad;
      private String sexo;
-     private Set libroporautors = new HashSet(0);
-
+     
     public Autor() {
     }
-
-	
-    public Autor(int idAutor, String nombre, String apellido, String nacionalidad) {
-        this.idAutor = idAutor;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.nacionalidad = nacionalidad;
-    }
-    public Autor(int idAutor, String nombre, String apellido, String nacionalidad, String sexo, Set libroporautors) {
+    
+    public Autor(int idAutor, String nombre, String apellido, String nacionalidad, String sexo) {
        this.idAutor = idAutor;
        this.nombre = nombre;
        this.apellido = apellido;
        this.nacionalidad = nacionalidad;
        this.sexo = sexo;
-       this.libroporautors = libroporautors;
     }
    
     public int getIdAutor() {
@@ -72,17 +62,6 @@ public class Autor  implements java.io.Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    public Set getLibroporautors() {
-        return this.libroporautors;
-    }
-    
-    public void setLibroporautors(Set libroporautors) {
-        this.libroporautors = libroporautors;
-    }
-
-
-
 
 }
-
 
