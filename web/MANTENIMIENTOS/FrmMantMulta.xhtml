@@ -32,7 +32,7 @@
                                         <p:outputLabel  value="Fecha de inicio :" for="finicio" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText size="20" maxlength="20" id="finicio" value="#{mantMultaMBR.multa.inicio}"
+                                        <p:inputText size="20" maxlength="20" id="finicio" value="#{mantMultaMBR.multa.cadinicio}"
                                                      style="font-family: arial;">
                                         </p:inputText>
                                     </p:column>
@@ -40,7 +40,7 @@
                                         <p:outputLabel  value="Fecha de fin :" for="ffin" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:inputText size="20" maxlength="20" id="ffin" value="#{mantMultaMBR.multa.fin}"
+                                        <p:inputText size="20" maxlength="20" id="ffin" value="#{mantMultaMBR.multa.cadfin}"
                                                      style="font-family: arial">
                                         </p:inputText>
                                     </p:column>
@@ -78,16 +78,16 @@
                                     <h:outputText value="#{item.idMulta}"/>
                                 </p:column>
                                 <p:column headerText="Inicio" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.inicio}">
-                                    <h:outputText value=" #{item.inicio}"/>
+                                    <h:outputText value=" #{item.cadinicio}"/>
                                 </p:column>
                                 <p:column headerText="Fin" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.fin}" >
-                                    <h:outputText value="#{item.fin}"/>
+                                    <h:outputText value="#{item.cadfin}"/>
                                 </p:column>
                                 <p:column headerText="Monto" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.monto}" >
                                     <h:outputText value="#{item.monto}"/>
                                 </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
-                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantMultaMBR.eliminarLector(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantMultaMBR.eliminarMulta(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
                                 
                             </p:dataTable>

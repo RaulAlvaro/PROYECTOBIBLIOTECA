@@ -9,15 +9,22 @@ import com.pe.appweb.proybiblioteca.dao.MultaDAO;
 import com.pe.appweb.proybiblioteca.entidades.Multa;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
- * @author Sebastian
+ * @author Usuario
  */
+@ManagedBean
+@ViewScoped
 public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
     
     private Multa multa;
@@ -90,8 +97,15 @@ public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
         try {
             String respuesta;
             int idCargo = 0;
-            
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             this.multa.setIdMulta(0);
+            //this.multa.setInicio(LocalDate.parse(multa.getCadinicio(), form));
+            java.util.Date parsed1 = format.parse(multa.getCadinicio());
+            Date sql1 = new java.sql.Date(parsed1.getTime());
+            this.multa.setInicio(sql1);
+            java.util.Date parsed2 = format.parse(multa.getCadinicio());
+            Date sql2 = new java.sql.Date(parsed1.getTime());
+            this.multa.setFin(sql2);
             respuesta = multaDAO.RegistrarMulta(this.multa);
 
             if (respuesta.equals("Registrado")) {
@@ -173,6 +187,5 @@ public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
-    
-    
+
 }

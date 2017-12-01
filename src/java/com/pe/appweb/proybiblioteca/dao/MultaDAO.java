@@ -36,8 +36,8 @@ public class MultaDAO implements MultaService{
                     try{
                             CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                             cs.setInt(1, multa.getIdMulta());
-                            cs.setDate(2, (Date) multa.getInicio());
-                            cs.setDate(3, (Date) multa.getFin());
+                            cs.setDate(2,multa.getInicio());
+                            cs.setDate(3,multa.getFin());
                             cs.setInt(4, multa.getMonto());
                             int inserto = cs.executeUpdate();
                             if(inserto==0) {
@@ -72,7 +72,9 @@ public class MultaDAO implements MultaService{
                             if(rs.next()) {
                                     multa.setIdMulta(rs.getInt("idMulta"));
                                     multa.setInicio(rs.getDate("inicio"));
+                                    multa.setCadinicio(rs.getDate("inicio").getDate() + "/"+rs.getDate("inicio").getMonth()+"/"+rs.getDate("inicio").getYear());
                                     multa.setFin(rs.getDate("fin"));
+                                    multa.setCadfin(rs.getDate("fin").getDate() + "/"+rs.getDate("fin").getMonth()+"/"+rs.getDate("fin").getYear());
                                     multa.setMonto(rs.getInt("monto"));
                             }
                     }catch(SQLException ex) {}
@@ -99,7 +101,9 @@ public class MultaDAO implements MultaService{
                                     Multa multa = new Multa();
                                     multa.setIdMulta(rs.getInt("idMulta"));
                                     multa.setInicio(rs.getDate("inicio"));
+                                    multa.setCadinicio(rs.getDate("inicio").getDate() + "/"+rs.getDate("inicio").getMonth()+"/"+rs.getDate("inicio").getYear());
                                     multa.setFin(rs.getDate("fin"));
+                                    multa.setCadfin(rs.getDate("fin").getDate() + "/"+rs.getDate("fin").getMonth()+"/"+rs.getDate("fin").getYear());
                                     multa.setMonto(rs.getInt("monto"));
                                     lista.add(multa);
                             }
@@ -124,8 +128,8 @@ public class MultaDAO implements MultaService{
                     try{
                             CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                             cs.setInt(1, multa.getIdMulta());
-                            cs.setDate(2, (Date) multa.getInicio());
-                            cs.setDate(3, (Date) multa.getFin());
+                            cs.setDate(2,multa.getInicio());
+                            cs.setDate(3,multa.getFin());
                             cs.setInt(4, multa.getMonto());
                             int inserto = cs.executeUpdate();
 
