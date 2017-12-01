@@ -13,12 +13,11 @@ import java.util.List;
  * @author RAUL
  */
 public interface AutorService {
-    /*
-    public abstract boolean RegistrarAutor(Autor autor);
-    public abstract List<Autor> ListadoAutorTodos(Session session);
-    public abstract Autor ListadoAutorId(Session session,int idAutor);
-    public abstract boolean ActualizarAutor(Session session, Autor autor);
-    public abstract Integer ContadorRegistroAutor(Session session);
-    public abstract boolean EliminarAutorID(Session session, Autor idAutor);
-    */
+    
+  public abstract String RegistrarAutor(Autor autor);
+  public abstract List<Autor> ListadoAutorTodos();
+  public abstract Autor ListadoAutorId(int idAutor);
+  public abstract String ActualizarAutor(Autor autor);
+  public abstract String EliminarAutorId(Autor autor);
+  
 }

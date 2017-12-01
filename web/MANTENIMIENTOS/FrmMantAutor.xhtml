@@ -80,10 +80,10 @@
                     <h:form id="frmListaTAutor">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
                         <p:panel style="width: 750px" id="paneltable">
-                            <p:dataTable rowKey="#{item.idAutor}" id="tablaListaTAutor" var="item" value="#{mantAutorMBR.listadoautor()}" scrollable="true" scrollHeight="150"  
+                            <p:dataTable rowKey="#{item.idAutor}" id="tablaListaTAutor" var="item" value="#{mantAutorMBR.listaautor}" scrollable="true" scrollHeight="150"  
                                          style="width: 720px" selection="#{mantAutorMBR.autorcombos}" selectionMode="single" 
                                          emptyMessage="No se encontro información">
-                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantAutorMBR.cargarCombos()}" />
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantAutorMBR.cargarCombosAutor()}" />
 
                                 <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idAutor}" filterStyle="width: 35%">
                                     <h:outputText value="#{item.idAutor}"/>

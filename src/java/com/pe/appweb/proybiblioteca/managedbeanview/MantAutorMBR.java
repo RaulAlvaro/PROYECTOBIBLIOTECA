@@ -6,9 +6,7 @@
 package com.pe.appweb.proybiblioteca.managedbeanview;
 
 import com.pe.appweb.proybiblioteca.dao.AutorDAO;
-import com.pe.appweb.proybiblioteca.dao.LibroDAO;
 import com.pe.appweb.proybiblioteca.entidades.Autor;
-import com.pe.appweb.proybiblioteca.entidades.Libro;
 import com.pe.appweb.proybiblioteca.util.MensajeSYSUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,10 +22,6 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class MantAutorMBR extends MensajeSYSUtils implements Serializable {
-/*
-    Session session;
-    Transaction transaction;
-
     private Autor autor;
     private Autor autorcombos;
     private AutorDAO autorDAO;
@@ -48,102 +42,57 @@ public class MantAutorMBR extends MensajeSYSUtils implements Serializable {
     }
 
     private void initlistDep() {
+        listadoAutor();
     }
-    
+
     public String eliminarAutor(Autor autor){
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
+        String respuesta;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = autorDAO.EliminarAutorID(session, autor);
-            this.transaction.commit();
-            if (respuesta) {
+            respuesta = autorDAO.EliminarAutorId(autor);
+            if (respuesta.equals("correcto")) {
                 messageInfo("Se realizo la elminación del Autor");
             } else {
                 messageError("NO Se realizo la eliminación del Autor");
             }
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantAutor";
     }
-    
-    
-    public void cargarCombos() {
-        this.session = null;
-        this.transaction = null;
 
+    public void cargarCombosAutor(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             //CARGAR COMBOS
             this.autor.setIdAutor(this.autorcombos.getIdAutor());
             this.autor.setNombre(this.autorcombos.getNombre());
             this.autor.setApellido(this.autorcombos.getApellido());
-            this.autor.setSexo(this.autorcombos.getSexo());
             this.autor.setNacionalidad(this.autorcombos.getNacionalidad());
-
+            this.autor.setSexo(this.autorcombos.getSexo());
             this.insert = Boolean.FALSE;
 
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
     }
 
-    public String registrarAutor() {
-        this.session = null;
-        this.transaction = null;
-
+    public String registrarAutor(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
-
-            int countReg = autorDAO.ContadorRegistroAutor(session);
+            String respuesta;
             int idCargo = 0;
-            if (countReg != 0) {
-                this.autor.setIdAutor(countReg + 1);
-            } else {
-                this.autor.setIdAutor(1);
-            }
-            respuesta = autorDAO.RegistrarAutor(this.autor);
-            this.transaction.commit();
 
-            if (respuesta) {
+            this.autor.setIdAutor(0);
+            respuesta = autorDAO.RegistrarAutor(this.autor);
+
+            if (respuesta.equals("Registrado")) {
                 messageInfo("Se realizo la creación del Autor");
             } else {
                 messageError("NO Se realizo la creación del Autor");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantAutor";
     }
@@ -154,85 +103,30 @@ public class MantAutorMBR extends MensajeSYSUtils implements Serializable {
         return "/MANTENIMIENTOS/FrmMantAutor";
     }
 
-    public void ListarAutorxId() {
-        this.session = null;
-        this.transaction = null;
+    public void listadoAutor(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = session.beginTransaction();
-            this.autor = autorDAO.ListadoAutorId(session, this.autor.getIdAutor());
-            System.out.println(autor.getNombre());
-            System.out.println("entra aaca");
-
-        } catch (Exception e) {
-            System.out.println("ERROR :" + e.getMessage());
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-                this.transaction.rollback();
-            }
-        }
-    }
-
-    public List<Autor> listadoautor() {
-        this.session = null;
-        this.transaction = null;
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            this.listaautor = autorDAO.ListadoAutorTodos(this.session);
-            this.transaction.commit();
-            return this.listaautor;
+            this.listaautor = autorDAO.ListadoAutorTodos();
+            //return this.listatipo;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-            return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
+            //return null;
         }
     }
 
-    public String actualizarAutor() {
-        this.session = null;
-        this.transaction = null;
+    public String actualizarAutor(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            Autor mautor = new Autor();
-            
-            mautor.setNombre(this.autor.getNombre());
-            mautor.setApellido(this.autor.getApellido());
-            mautor.setSexo(this.autor.getSexo());
-            mautor.setNacionalidad(this.autor.getNacionalidad());
-            
-            autorDAO.ActualizarAutor(session, this.autor);
-            this.transaction.commit();
-
+            autorDAO.ActualizarAutor(this.autor);
             messageInfo("Correcto: Los cambios fueron guardados correctamente");
 
             insert = Boolean.FALSE;
 
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantAutor";
     }
-
+  
     public Autor getAutor() {
         return autor;
     }
@@ -273,6 +167,5 @@ public class MantAutorMBR extends MensajeSYSUtils implements Serializable {
         this.insert = insert;
     }
 
-    */
 
 }
