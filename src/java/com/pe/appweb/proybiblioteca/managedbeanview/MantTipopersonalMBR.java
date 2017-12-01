@@ -22,183 +22,119 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class MantTipopersonalMBR extends MensajeSYSUtils implements Serializable{
-    
-    /*
-    private Tipopersonal tipopersonal;
+        private Tipopersonal tipopersonal;
     private Tipopersonal tipopersonalcombos;
     private TipopersonalDAO tipopersonalDAO;
     private List<Tipopersonal> listatipopersonal;
     private Boolean insert;
-
+  
     @PostConstruct
     private void init() {
         initInstancia();
         initlistDep();
     }
-
+  
     private void initInstancia() {
         this.tipopersonal = new Tipopersonal();
         this.tipopersonalDAO = new TipopersonalDAO();
         this.listatipopersonal = new ArrayList();
         this.insert = true;
     }
-
+  
     private void initlistDep() {
         listadoTipopersonal();
     }
-
+  
+  /* public String buscaTipoxId(int id){
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Autor buscaautor = new Autor();
+            buscaautor = this.autorDAO.ListadoAutorId(id);
+            String nombretipo = buscatipo.getTipo();
+            return nombretipo;
+    }*/
+  
+  
+  
     public String eliminarTipopersonal(Tipopersonal tipopersonal){
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
+        String respuesta;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = tipopersonalDAO.EliminarTipopersonalId(session, tipopersonal);
-            this.transaction.commit();
-            if (respuesta) {
-                messageInfo("Se realizo la elminación del Autor");
+            respuesta = tipopersonalDAO.EliminarTipopersonalId(tipopersonal);
+            if (respuesta.equals("correcto")) {
+                messageInfo("Se realizo la elminación del Tipo de personal");
             } else {
-                messageError("NO Se realizo la eliminación del Autor");
+                messageError("NO Se realizo la eliminación del Tipo de personal");
             }
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipopersonal";
     }
-    
-    public void cargarCombosAutor(){
-        this.session = null;
-        this.transaction = null;
-
+  
+    public void cargarCombosTipopersonal(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             //CARGAR COMBOS
             this.tipopersonal.setIdTipoPersonal(this.tipopersonalcombos.getIdTipoPersonal());
             this.tipopersonal.setNombre(this.tipopersonalcombos.getNombre());
             this.insert = Boolean.FALSE;
-
+  
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
+  
         }
     }
-    
+  
     public String registrarTipopersonal(){
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
-
-            int countReg = tipopersonalDAO.ContadorRegistroTipopersonal(session);
+            String respuesta;
             int idCargo = 0;
-            if (countReg != 0) {
-                this.tipopersonal.setIdTipoPersonal(countReg + 1);
-            } else {
-                this.tipopersonal.setIdTipoPersonal(1);
-            }
+  
+            this.tipopersonal.setIdTipoPersonal(0);
             respuesta = tipopersonalDAO.RegistrarTipopersonal(this.tipopersonal);
-            this.transaction.commit();
-
-            if (respuesta) {
-                messageInfo("Se realizo la creación del Autor");
+  
+            if (respuesta.equals("Registrado")) {
+                messageInfo("Se realizo la creación del Tipo de personal");
             } else {
-                messageError("NO Se realizo la creación del Autor");
+                messageError("NO Se realizo la creación del Tipo de personal");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipopersonal";
     }
-    
+  
     public String limpiarcajas() {
         this.tipopersonal=null;
         this.tipopersonalcombos = null;
         return "/MANTENIMIENTOS/FrmMantTipopersonal";
     }
-    
-    public List<Tipopersonal> listadoTipopersonal(){
-        this.session = null;
-        this.transaction = null;
+  
+    public void listadoTipopersonal(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            this.listatipopersonal = tipopersonalDAO.ListadoTipopersonalTodos(this.session);
-            this.transaction.commit();
-            return this.listatipopersonal;
+            this.listatipopersonal = tipopersonalDAO.ListadoTipopersonalTodos();
+            //return this.listatipo;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-            return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
+            //return null;
         }
     }
-    
+  
     public String actualizarTipopersonal(){
-        this.session = null;
-        this.transaction = null;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            tipopersonalDAO.ActualizarTipopersonal(session, this.tipopersonal);
-            this.transaction.commit();
-
+            tipopersonalDAO.ActualizarTipopersonal(this.tipopersonal);
             messageInfo("Correcto: Los cambios fueron guardados correctamente");
-
-            insert = Boolean.TRUE;
-
+  
+            insert = Boolean.FALSE;
+  
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantTipopersonal";
     }
-    
+
+      
     
     public Tipopersonal getTipopersonal() {
         return tipopersonal;
@@ -239,5 +175,5 @@ public class MantTipopersonalMBR extends MensajeSYSUtils implements Serializable
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
-*/
+
 }

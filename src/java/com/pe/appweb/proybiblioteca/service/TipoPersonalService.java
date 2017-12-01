@@ -16,6 +16,7 @@ public interface TipoPersonalService {
     
     public abstract String RegistrarTipopersonal(Tipopersonal tipo);
     public abstract List<Tipopersonal> ListadoTipopersonalTodos();
+    public abstract Tipopersonal ListadoTipopersonalId(int idTipoPersonal);
     public abstract String ActualizarTipopersonal(Tipopersonal tipo);
     public abstract String EliminarTipopersonalId(Tipopersonal tipo);
 
