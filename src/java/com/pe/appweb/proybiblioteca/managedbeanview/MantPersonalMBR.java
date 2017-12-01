@@ -148,10 +148,10 @@ private Personal personal;
             Personal buscarpersonal = new Personal();
             buscarpersonal = this.personalDAO.ListadoPersonalId(id);
             String nombrepersonal = buscarpersonal.getNombre();
-            String apellidopersonal = buscarpersonal.getNombre();
-            String telefonopersonal = buscarpersonal.getNombre();
-            String correopersonal = buscarpersonal.getNombre();
-            String sexopersonal = buscarpersonal.getNombre();
+            String apellidopersonal = buscarpersonal.getApellido();
+            int telefonopersonal = buscarpersonal.getTelefono();
+            String correopersonal = buscarpersonal.getCorreo();
+            String sexopersonal = buscarpersonal.getSexo();
             String cadena = nombrepersonal+apellidopersonal+telefonopersonal+correopersonal+sexopersonal;
             return cadena; 
     }

@@ -70,14 +70,14 @@
                                          emptyMessage="No se encontro información">
                                 <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantLibroMBR.cargarCombosLibro()}" />
 
-                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idTipo}" filterStyle="width: 35%">
+                                <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.idLibro}" filterStyle="width: 35%">
                                     <h:outputText value="#{item.idLibro}"/>
                                 </p:column>
-                                <p:column headerText="Titulo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
+                                <p:column headerText="Titulo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.titulo}">
                                     <h:outputText value=" #{item.titulo}"/>
                                 </p:column>
                                 
-                                <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
+                                <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{mantTipoMBR.buscaTipoxId(item.idTipo)}">
                                     <h:outputText value="#{mantTipoMBR.buscaTipoxId(item.idTipo)}"/>
                                 </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
