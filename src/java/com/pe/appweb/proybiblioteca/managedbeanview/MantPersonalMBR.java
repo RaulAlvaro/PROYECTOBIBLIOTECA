@@ -25,202 +25,135 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
 
-/*
-    private Personal personal;
+private Personal personal;
     private Personal personalcombos;
     private PersonalDAO personalDAO;
     private List<Personal> listapersonal;
-    private Boolean insert;
-
-    private Tipopersonal tipopersonal;
+    private boolean insert;
+    
+    private int idTipoPersonal;
     private TipopersonalDAO tipopersonalDAO;
-    private List<Tipopersonal> listatipopersonal;
 
     @PostConstruct
     private void init() {
         initInstancia();
         initlistDep();
-
     }
 
     private void initInstancia() {
         this.personal = new Personal();
-        this.personalcombos = new Personal();
-        this.tipopersonal = new Tipopersonal();
         this.personalDAO = new PersonalDAO();
         this.listapersonal = new ArrayList();
+        this.personalcombos = new Personal();
         this.insert = true;
-        this.listatipopersonal = new ArrayList();
         this.tipopersonalDAO = new TipopersonalDAO();
     }
 
     private void initlistDep() {
-    }
-
-    public String eliminarPersonal(Personal personal) {
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = personalDAO.EliminarPersonalId(session, personal);
-            this.transaction.commit();
-            if (respuesta) {
-                messageInfo("Se realizo la elminación del Personal");
-            } else {
-                messageError("NO Se realizo la eliminación del Personal");
-            }
-        } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
-        return "/MANTENIMIENTOS/FrmMantPersonal";
-    }
-
-    public void cargarCombosAutor() {
-        this.session = null;
-        this.transaction = null;
-
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            //CARGAR COMBOS
-            this.personal.setIdPersonal(this.personalcombos.getIdPersonal());
-            this.personal.setApellido(this.personalcombos.getApellido());
-            this.personal.setNombre(this.personalcombos.getNombre());
-            this.personal.setCorreo(this.personalcombos.getCorreo());
-            this.personal.setSexo(this.personalcombos.getSexo());
-            this.personal.setTipopersonal(this.personalcombos.getTipopersonal());
-            this.personal.setTelefono(this.personalcombos.getTelefono());
-            this.insert = Boolean.FALSE;
-
-        } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
-            messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
+        listadoPersonal();
     }
 
     public String registrarPersonal() {
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
+            String respuesta;
 
-            int countReg = personalDAO.ContadorRegistroPersonal(session);
-            int idCargo = 0;
-            if (countReg != 0) {
-                this.personal.setIdPersonal(countReg + 1);
-            } else {
-                this.personal.setIdPersonal(1);
-            }
-            tipopersonal = tipopersonalDAO.BuscarTipoPersonalId(session, tipopersonal.getIdTipoPersonal());
-            this.personal.setTipopersonal(tipopersonal);
+            this.personal.setIdPersonal(0);
+            personal.setIdTipopersonal(this.idTipoPersonal);
             respuesta = personalDAO.RegistrarPersonal(this.personal);
-            this.transaction.commit();
-
-            if (respuesta) {
-                messageInfo("Se realizo la creación del Personal");
+            if (respuesta.equals("Registrado")) {
+                messageInfo("Se realizo la creación del personal");
             } else {
-                messageError("NO Se realizo la creación del Personal");
+                messageError("NO Se realizo la creación del personal");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantPersonal";
     }
-
+    
     public String limpiarcajas() {
-        this.personal = null;
+        this.personal=null;
         this.personalcombos = null;
         return "/MANTENIMIENTOS/FrmMantPersonal";
     }
-
-    public List<Personal> listadoPersonal() {
-        //System.out.println("INGRESO A LA FUNCION");
-        this.session = null;
-        this.transaction = null;
-
+    
+    public void listadoPersonal(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-
-            this.listapersonal = personalDAO.ListadoPersonalTodos(this.session);
-            this.transaction.commit();
-            return this.listapersonal;
-
-//            System.out.println(listaTEmpresa.size());
+            
+            this.listapersonal = personalDAO.ListadoPersonalTodos();
+            //return this.listalibros;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-            return null;
-        } finally {
-            if (this.session != null) {
-
-                this.session.close();
-
-            }
+            //return null;
         }
     }
-
-    public String actualizarPersonal() {
-        this.session = null;
-        this.transaction = null;
+    
+    public String actualizarPersonal(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
+            personal.setIdTipopersonal(this.idTipoPersonal);
+            personalDAO.ActualizarPersonal(this.personal);
+            this.idTipoPersonal = 0;
 
-            personalDAO.ActualizarPersonal(session, this.personal);
-            this.transaction.commit();
-
-            messageInfo("Correcto: Los cambios fueron guardados correctamente");
-
-            insert = Boolean.TRUE;
+            insert = Boolean.FALSE;
 
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantPersonal";
+    }
+    
+    public void cargarCombosPersonal(){
+        try {
+            //CARGAR COMBOS
+            this.personal.setIdPersonal(this.personalcombos.getIdPersonal());
+            this.personal.setNombre(this.personalcombos.getNombre());
+            this.personal.setApellido(this.personalcombos.getApellido());
+            this.personal.setTelefono(this.personalcombos.getTelefono());
+            this.personal.setCorreo(this.personalcombos.getCorreo());
+            this.personal.setSexo(this.personalcombos.getSexo());
+            //this.personal.setIdTipopersonal(this.personalcombos.getIdTipopersonal());
+            idTipoPersonal = this.personalcombos.getIdTipopersonal();
+            this.insert = Boolean.FALSE;
+
+        } catch (Exception ex) {
+            System.out.println("ERROR :" + ex.getMessage());  
+            messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
+        } 
+    }
+    
+    
+    public String eliminarPersonal(Personal personal){
+        String respuesta;
+        try {
+            respuesta = personalDAO.EliminarPersonalId(personal);
+            if (respuesta.equals("correcto")) {
+                messageInfo("Se realizo la elminación del personal");
+            } else {
+                messageError("NO Se realizo la eliminación del personal");
+            }
+        } catch (Exception ex) {
+            System.out.println("ERROR :" + ex.getMessage());
+            messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
+
+        }
+        return "/MANTENIMIENTOS/FrmMantPersonal";
+    }
+    
+    public String buscaPersonalxId(int id){
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Personal buscarpersonal = new Personal();
+            buscarpersonal = this.personalDAO.ListadoPersonalId(id);
+            String nombrepersonal = buscarpersonal.getNombre();
+            String apellidopersonal = buscarpersonal.getNombre();
+            String telefonopersonal = buscarpersonal.getNombre();
+            String correopersonal = buscarpersonal.getNombre();
+            String sexopersonal = buscarpersonal.getNombre();
+            String cadena = nombrepersonal+apellidopersonal+telefonopersonal+correopersonal+sexopersonal;
+            return cadena; 
     }
 
     public Personal getPersonal() {
@@ -255,20 +188,20 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
         this.listapersonal = listapersonal;
     }
 
-    public Boolean getInsert() {
+    public boolean isInsert() {
         return insert;
     }
 
-    public void setInsert(Boolean insert) {
+    public void setInsert(boolean insert) {
         this.insert = insert;
     }
 
-    public Tipopersonal getTipopersonal() {
-        return tipopersonal;
+    public int getIdTipoPersonal() {
+        return idTipoPersonal;
     }
 
-    public void setTipopersonal(Tipopersonal tipopersonal) {
-        this.tipopersonal = tipopersonal;
+    public void setIdTipoPersonal(int idTipoPersonal) {
+        this.idTipoPersonal = idTipoPersonal;
     }
 
     public TipopersonalDAO getTipopersonalDAO() {
@@ -278,15 +211,6 @@ public class MantPersonalMBR extends MensajeSYSUtils implements Serializable {
     public void setTipopersonalDAO(TipopersonalDAO tipopersonalDAO) {
         this.tipopersonalDAO = tipopersonalDAO;
     }
-
-    public List<Tipopersonal> getListatipopersonal() {
-        return listatipopersonal;
-    }
-
-    public void setListatipopersonal(List<Tipopersonal> listatipopersonal) {
-        this.listatipopersonal = listatipopersonal;
-    }
-
-
-*/
+    
+    
 }

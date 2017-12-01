@@ -45,13 +45,13 @@ public class MantTipopersonalMBR extends MensajeSYSUtils implements Serializable
         listadoTipopersonal();
     }
   
-  /* public String buscaTipoxId(int id){
+    public String buscaTipopersonalxId(int id){
             //this.musu= usudao.ListadoUsuarioxId(this.session,id);
-            Autor buscaautor = new Autor();
-            buscaautor = this.autorDAO.ListadoAutorId(id);
-            String nombretipo = buscatipo.getTipo();
+            Tipopersonal buscatipo = new Tipopersonal();
+            buscatipo = this.tipopersonalDAO.ListadoTipopersonalId(id);
+            String nombretipo = buscatipo.getNombre();
             return nombretipo;
-    }*/
+    }
   
   
   
