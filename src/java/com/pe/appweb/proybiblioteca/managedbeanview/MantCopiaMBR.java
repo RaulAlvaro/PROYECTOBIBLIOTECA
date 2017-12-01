@@ -53,6 +53,14 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
         //listadoTipo();
     }
     
+    public String buscaCopiaxId(int id){
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Copia buscaCopia = new Copia();
+            buscaCopia = this.copiaDAO.ListadoCopiaId(id);
+            String cadena = "" + buscaCopia.getIdCopia();
+            return cadena; 
+    }
+    
     public String registrarCopia() {
         try {
             String respuesta;

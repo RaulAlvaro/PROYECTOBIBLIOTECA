@@ -51,17 +51,17 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="devueltoprestamo" value="#{mantPrestamoMBR.prestamo.devuelto}" style="width:125px">
-                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
                                             <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align: right">
                                         <p:outputLabel  value="Agregado :" for="agregadoprestamo" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="estadolector" value="#{mantPrestamoMBR.prestamo.agregado}" style="width:125px">
-                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                        <p:selectOneMenu id="agregadoprestamo" value="#{mantPrestamoMBR.prestamo.agregado}" style="width:125px">
                                             <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                            <f:selectItem itemLabel="Inactivo" itemValue="0" />
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
@@ -70,7 +70,7 @@
                                         <p:outputLabel  value="Personal :" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idtipo" value="#{mantPrestamoMBR.idPersonal}" style="font-family: arial;width: 180px">                                        
+                                        <p:selectOneMenu id="idpersonal" value="#{mantPrestamoMBR.idPersonal}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
                                             <f:selectItems value="#{mantPersonalMBR.listapersonal}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idPersonal}"/> 
                                         </p:selectOneMenu>
@@ -79,7 +79,7 @@
                                         <p:outputLabel  value="Copia :" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idtipo" value="#{mantPrestamoMBR.idCopia}" style="font-family: arial;width: 180px">                                        
+                                        <p:selectOneMenu id="idcopia" value="#{mantPrestamoMBR.idCopia}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione copia"/>                                             
                                             <f:selectItems value="#{mantCopiaMBR.listacopia}" var="idet" itemLabel="#{idet.idCopia}" itemValue="#{idet.idCopia}"/> 
                                         </p:selectOneMenu>
@@ -90,7 +90,7 @@
                                         <p:outputLabel  value="Lector :" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idtipo" value="#{mantPrestamoMBR.idPersonal}" style="font-family: arial;width: 180px">                                        
+                                        <p:selectOneMenu id="idlector" value="#{mantPrestamoMBR.idLector}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione lector"/>                                             
                                             <f:selectItems value="#{mantLectorMBR.listalector}" var="idet" itemLabel="#{idet.nombres}" itemValue="#{idet.codigo}"/> 
                                         </p:selectOneMenu>
@@ -99,7 +99,7 @@
                                         <p:outputLabel  value="Multa :" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idtipo" value="#{mantPrestamoMBR.idPersonal}" style="font-family: arial;width: 180px">                                        
+                                        <p:selectOneMenu id="idmulta" value="#{mantPrestamoMBR.idMulta}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione multa"/>                                             
                                             <f:selectItems value="#{mantMultaMBR.listamulta}" var="idet" itemLabel="#{idet.monto}" itemValue="#{idet.idMulta}"/> 
                                         </p:selectOneMenu>
@@ -133,14 +133,26 @@
                                 <p:column headerText="Fin" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.cadfin}" >
                                     <h:outputText value="#{item.cadfin}"/>
                                 </p:column>
-                                <p:column headerText="Agregado" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.devuelto}" >
+                                <p:column headerText="Devuelto" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.devuelto}" >
                                     <h:outputText value="#{item.devuelto}"/>
                                 </p:column>
                                 <p:column headerText="Agregado" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.agregado}" >
                                     <h:outputText value="#{item.agregado}"/>
                                 </p:column>
+                                <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{mantLectorMBR.buscaLectorxId(item.idLector)}">
+                                    <h:outputText value="#{mantLectorMBR.buscaLectorxId(item.idLector)}"/>
+                                </p:column>
+                                <p:column headerText="Personal" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{mantPersonalMBR.buscaPersonalxId(item.idPersonal)}">
+                                    <h:outputText value="#{mantPersonalMBR.buscaPersonalxId(item.idPersonal)}"/>
+                                </p:column>
+                                <p:column headerText="Copia" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{mantCopiaMBR.buscaCopiaxId(item.idCopia)}">
+                                    <h:outputText value="#{mantCopiaMBR.buscaCopiaxId(item.idCopia)}"/>
+                                </p:column>
+                                <p:column headerText="Multa" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{mantMultaMBR.buscaMultaxId(item.idMulta)}">
+                                    <h:outputText value="#{mantMultaMBR.buscaMultaxId(item.idMulta)}"/>
+                                </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
-                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantPrestamoMBR.eliminarPrestamo(item)":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantPrestamoMBR.eliminarPrestamo(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
                                 
                             </p:dataTable>
