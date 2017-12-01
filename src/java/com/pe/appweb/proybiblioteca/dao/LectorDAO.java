@@ -174,12 +174,6 @@ public class LectorDAO implements LectorService {
             try{
                 CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                 cs.setInt(1, lector.getCodigo());
-                cs.setString(2, lector.getNombres());
-                cs.setString(3, lector.getApellidos());
-                cs.setInt(4, lector.getTelefono());
-                cs.setString(5, lector.getSexo());
-                cs.setBoolean(6, lector.isEstado());
-                cs.setInt(7, lector.getStrikes());
                 cs.executeUpdate();
                 rpta="correcto";
             }catch(SQLException ex){rpta=ex.getMessage();}

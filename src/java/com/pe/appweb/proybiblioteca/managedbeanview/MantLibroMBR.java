@@ -138,6 +138,13 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
         return "/MANTENIMIENTOS/FrmMantLibro";
     }
     
+    public String buscaLibroxId(int id){
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Libro buscarlbro = new Libro();
+            buscarlbro = this.libroDAO.ListadoLibroId(id);
+            String nombretipo = buscarlbro.getTitulo();
+            return nombretipo; 
+    }
 
     public Libro getLibro() {
         return libro;
