@@ -71,6 +71,7 @@ public class LibroDAO implements LibroService{
                       Libro libro = new Libro();
                       libro.setIdLibro(rs.getInt("idLibro"));
                       libro.setTitulo(rs.getString("titulo"));
+                      libro.setIdTipo(rs.getInt("tipo_idTipo"));
                       lista.add(libro);
                 }
             }catch(SQLException ex){}

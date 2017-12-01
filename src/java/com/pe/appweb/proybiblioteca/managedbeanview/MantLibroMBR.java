@@ -57,8 +57,8 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
         try {
             String respuesta;
 
-            this.libro.setIdLibro(1);
-            libro.setIdTipo(tipoDAO.ListadoTipoId(this.idTipo).getIdTipo());
+            this.libro.setIdLibro(0);
+            libro.setIdTipo(this.idTipo);
             respuesta = libroDAO.RegistroLibro(this.libro);
             if (respuesta.equals("Registrado")) {
                 messageInfo("Se realizo la creación del Autor");
@@ -92,7 +92,7 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
     
     public String actualizarLibro(){
         try {
-            libro.setIdTipo(tipoDAO.ListadoTipoId(this.idTipo).getIdTipo());
+            libro.setIdTipo(this.idTipo);
             libroDAO.ActualizarLibro(this.libro);
             this.idTipo = 0;
 

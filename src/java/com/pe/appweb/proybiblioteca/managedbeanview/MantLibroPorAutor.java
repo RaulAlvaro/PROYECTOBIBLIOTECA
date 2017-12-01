@@ -27,8 +27,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
 
-/*
-    
+    /*
     private Libroporautor libroporautor;
     private LibroporautorDAO libroporautorDAO;
     
@@ -65,11 +64,9 @@ public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
     }
 
     public String registrarLibroPorAutor(){
-        this.session = null;
-        this.transaction = null;
+        
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
+            
             boolean respuesta;
             
             
@@ -186,6 +183,6 @@ public class MantLibroPorAutor extends MensajeSYSUtils implements Serializable{
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
+ 
 */
-    
 }
