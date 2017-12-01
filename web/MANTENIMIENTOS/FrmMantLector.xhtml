@@ -104,22 +104,25 @@
                     <h:form id="frmListaTAutor">
                         <p:growl id="growl" showDetail="true" sticky="false"/>
                         <p:panel style="width: 750px" id="paneltable">
-                            <p:dataTable rowKey="#{item.codigo}" id="tablaListaTAutor" var="item" value="#{mantLectorMBR.listadolector()}" scrollable="true" scrollHeight="150"  
+                            <p:dataTable rowKey="#{item.codigo}" id="tablaListaTAutor" var="item" value="#{mantLectorMBR.listalector}" scrollable="true" scrollHeight="150"  
                                          style="width: 720px" selection="#{mantLectorMBR.lectorcombos}" selectionMode="single" 
                                          emptyMessage="No se encontro información">
-                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantLectorMBR.cargarCombos()}" />
+                                <p:ajax event="rowSelect" update=":form1:panelinfoemp,:form1:panelbtn,:frmListaTAutor" listener="#{mantLectorMBR.cargarCombosLector()}" />
 
                                 <p:column headerText="ID" style="text-align: center;font-family: arial;font-size: 9px;width: 3%" filterBy="#{item.codigo}" filterStyle="width: 35%">
                                     <h:outputText value="#{item.codigo}"/>
                                 </p:column>
-                                <p:column headerText="Nombre" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.nombres}">
+                                <p:column headerText="Nombres" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.nombres}">
                                     <h:outputText value=" #{item.nombres}"/>
                                 </p:column>
                                 <p:column headerText="Apellidos" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.apellidos}" >
                                     <h:outputText value="#{item.apellidos}"/>
                                 </p:column>
-                                <p:column headerText="Nacionalidad" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.telefono}" >
+                                <p:column headerText="Telefono" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.telefono}" >
                                     <h:outputText value="#{item.telefono}"/>
+                                </p:column>
+                                <p:column headerText="Sexo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.sexo}" >
+                                    <h:outputText value="#{item.sexo}"/>
                                 </p:column>
                                 <p:column headerText="Estado" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.estado}" >
                                     <h:outputText value="#{item.estado}"/>

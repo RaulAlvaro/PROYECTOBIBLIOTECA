@@ -22,9 +22,6 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class MantLectorMBR extends MensajeSYSUtils implements Serializable{
-/*
-    Session session;
-    Transaction transaction;
 
     private Lector lector;
     private Lector lectorcombos;
@@ -46,190 +43,103 @@ public class MantLectorMBR extends MensajeSYSUtils implements Serializable{
     }
 
     private void initlistDep() {
+        listadoLector();
     }
     
+    public String buscaLectorxId(int id){
+            //this.musu= usudao.ListadoUsuarioxId(this.session,id);
+            Lector buscalector = new Lector();
+            buscalector = this.lectorDAO.ListadoLectorId(id);
+            String nombreslector = buscalector.getNombres();
+            String apellidoslector = buscalector.getApellidos();
+            int telefonolector = buscalector.getTelefono();
+            String sexolector = buscalector.getSexo();
+            int strikeslector = buscalector.getStrikes();
+            boolean estadolector = buscalector.isEstado();
+            String cadena = nombreslector + apellidoslector + telefonolector + sexolector + strikeslector + estadolector;
+            return cadena; 
+    }
+    
+    
+    
     public String eliminarLector(Lector lector){
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
+        String respuesta;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = lectorDAO.EliminarLectorID(session, lector);
-            this.transaction.commit();
-            if (respuesta) {
-                messageInfo("Se realizo la elminación del Autor");
+            respuesta = lectorDAO.EliminarLectorID(lector);
+            if (respuesta.equals("correcto")) {
+                messageInfo("Se realizo la elminación del lector");
             } else {
-                messageError("NO Se realizo la eliminación del Autor");
+                messageError("NO Se realizo la eliminación del lector");
             }
-        } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
+        } catch (Exception ex) {   
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLector";
     }
     
-    
-    public void cargarCombos() {
-        this.session = null;
-        this.transaction = null;
-
+    public void cargarCombosLector(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             //CARGAR COMBOS
             this.lector.setCodigo(this.lectorcombos.getCodigo());
             this.lector.setNombres(this.lectorcombos.getNombres());
             this.lector.setApellidos(this.lectorcombos.getApellidos());
-            this.lector.setSexo(this.lectorcombos.getSexo());
             this.lector.setTelefono(this.lectorcombos.getTelefono());
-            this.lector.setStrikes(this.lectorcombos.getStrikes());
+            this.lector.setSexo(this.lectorcombos.getSexo());
             this.lector.setEstado(this.lectorcombos.isEstado());
+            this.lector.setStrikes(this.lectorcombos.getStrikes());
             this.insert = Boolean.FALSE;
 
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
+        } 
     }
-
-    public String registrarLector() {
-        this.session = null;
-        this.transaction = null;
-
+    
+    public String registrarLector(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
-
-            int countReg = lectorDAO.ContadorRegistroLector(session);
+            String respuesta;
             int idCargo = 0;
-            if (countReg != 0) {
-                this.lector.setCodigo(countReg + 1);
-            } else {
-                this.lector.setCodigo(1);
-            }
+            
+            this.lector.setCodigo(0);
             respuesta = lectorDAO.RegistrarLector(this.lector);
-            this.transaction.commit();
 
-            if (respuesta) {
-                messageInfo("Se realizo la creación del Lector");
+            if (respuesta.equals("Registrado")) {
+                messageInfo("Se realizo la creación del lector");
             } else {
-                messageError("NO Se realizo la creación del Lector");
+                messageError("NO Se realizo la creación del lector");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLector";
     }
-
+    
     public String limpiarcajas() {
         this.lector=null;
         this.lectorcombos = null;
         return "/MANTENIMIENTOS/FrmMantLector";
     }
-
-    public void ListarLectorxId() {
-        this.session = null;
-        this.transaction = null;
+    
+    public void listadoLector(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = session.beginTransaction();
-            this.lector = lectorDAO.ListadoLectorId(session, this.lector.getCodigo());
-            System.out.println(lector.getNombres());
-            System.out.println("entra aaca");
-
-        } catch (Exception e) {
-            System.out.println("ERROR :" + e.getMessage());
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-                this.transaction.rollback();
-            }
-        }
-    }
-
-    public List<Lector> listadolector() {
-        this.session = null;
-        this.transaction = null;
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            this.listalector = lectorDAO.ListadoLectorTodos(this.session);
-            this.transaction.commit();
-            return this.listalector;
+            this.listalector = lectorDAO.ListadoLectorTodos();
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-            return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
     }
-
-    public String actualizarLector() {
-        this.session = null;
-        this.transaction = null;
+    
+    public String actualizarLector(){
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            
-            Lector mlector = new Lector();
-            
-            mlector.setNombres(this.lector.getNombres());
-            mlector.setApellidos(this.lector.getApellidos());
-            mlector.setSexo(this.lector.getSexo());
-            mlector.setTelefono(this.lector.getTelefono());
-            mlector.setEstado(this.lector.isEstado());
-            mlector.setStrikes(this.lector.getStrikes());
-            
-            lectorDAO.ActualizarLector(session, this.lector);
-            this.transaction.commit();
-
+            lectorDAO.ActualizarLector(this.lector);
             messageInfo("Correcto: Los cambios fueron guardados correctamente");
 
             insert = Boolean.FALSE;
 
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLector";
     }
@@ -273,5 +183,6 @@ public class MantLectorMBR extends MensajeSYSUtils implements Serializable{
     public void setInsert(Boolean insert) {
         this.insert = insert;
     }
-*/
+    
+    
 }
