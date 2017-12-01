@@ -230,6 +230,70 @@ public class MantPrestamoMBR extends MensajeSYSUtils implements Serializable{
         this.insert = insert;
     }
 
+    public PersonalDAO getPersonalDAO() {
+        return personalDAO;
+    }
+
+    public void setPersonalDAO(PersonalDAO personalDAO) {
+        this.personalDAO = personalDAO;
+    }
+
+    public int getIdPersonal() {
+        return idPersonal;
+    }
+
+    public void setIdPersonal(int idPersonal) {
+        this.idPersonal = idPersonal;
+    }
+
+    public CopiaDAO getCopiaDAO() {
+        return copiaDAO;
+    }
+
+    public void setCopiaDAO(CopiaDAO copiaDAO) {
+        this.copiaDAO = copiaDAO;
+    }
+
+    public int getIdCopia() {
+        return idCopia;
+    }
+
+    public void setIdCopia(int idCopia) {
+        this.idCopia = idCopia;
+    }
+
+    public LectorDAO getLectorDAO() {
+        return lectorDAO;
+    }
+
+    public void setLectorDAO(LectorDAO lectorDAO) {
+        this.lectorDAO = lectorDAO;
+    }
+
+    public int getIdLector() {
+        return idLector;
+    }
+
+    public void setIdLector(int idLector) {
+        this.idLector = idLector;
+    }
+
+    public MultaDAO getMultaDAO() {
+        return multaDAO;
+    }
+
+    public void setMultaDAO(MultaDAO multaDAO) {
+        this.multaDAO = multaDAO;
+    }
+
+    public int getIdMulta() {
+        return idMulta;
+    }
+
+    public void setIdMulta(int idMulta) {
+        this.idMulta = idMulta;
+    }
+
     
     
 }
