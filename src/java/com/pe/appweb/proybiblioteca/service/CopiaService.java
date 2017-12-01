@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface CopiaService {
     public abstract String RegistraCopia(Copia copia);
-    public abstract List<Copia> ListadoLibrosTodos();
+    public abstract List<Copia> ListadoCopiassTodos();
     public abstract Copia ListadoCopiaId(int idCopia);
-    public abstract Copia ActualizarCopia(Copia copia);
+    public abstract String ActualizarCopia(Copia copia);
     public abstract String EliminarCopia(Copia copia);
 
 }
