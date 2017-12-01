@@ -72,9 +72,9 @@ public class MultaDAO implements MultaService{
                             if(rs.next()) {
                                     multa.setIdMulta(rs.getInt("idMulta"));
                                     multa.setInicio(rs.getDate("inicio"));
-                                    multa.setCadinicio(rs.getDate("inicio").getDate() + "/"+rs.getDate("inicio").getMonth()+"/"+rs.getDate("inicio").getYear());
+                                    multa.setCadinicio(rs.getDate("inicio").toString());
                                     multa.setFin(rs.getDate("fin"));
-                                    multa.setCadfin(rs.getDate("fin").getDate() + "/"+rs.getDate("fin").getMonth()+"/"+rs.getDate("fin").getYear());
+                                    multa.setCadfin(rs.getDate("fin").toString());
                                     multa.setMonto(rs.getInt("monto"));
                             }
                     }catch(SQLException ex) {}
@@ -101,9 +101,9 @@ public class MultaDAO implements MultaService{
                                     Multa multa = new Multa();
                                     multa.setIdMulta(rs.getInt("idMulta"));
                                     multa.setInicio(rs.getDate("inicio"));
-                                    multa.setCadinicio(rs.getDate("inicio").getDate() + "/"+rs.getDate("inicio").getMonth()+"/"+rs.getDate("inicio").getYear());
+                                    multa.setCadinicio(rs.getDate("inicio").toString());
                                     multa.setFin(rs.getDate("fin"));
-                                    multa.setCadfin(rs.getDate("fin").getDate() + "/"+rs.getDate("fin").getMonth()+"/"+rs.getDate("fin").getYear());
+                                    multa.setCadfin(rs.getDate("fin").toString());
                                     multa.setMonto(rs.getInt("monto"));
                                     lista.add(multa);
                             }

@@ -61,15 +61,7 @@ public class Multa  implements java.io.Serializable {
     }
 
     public String getCadinicio() {
-        if(this.cadinicio==null){
-            if(inicio!=null){
-                return String.valueOf(inicio.getDate())+"/" + String.valueOf(inicio.getMonth())+"/" +String.valueOf(inicio.getYear());
-            }else{
-                return "";
-            }
-        }else{
-            return cadinicio;
-        }
+        return cadinicio;
     }
 
     public void setCadinicio(String cadinicio) {
@@ -77,15 +69,7 @@ public class Multa  implements java.io.Serializable {
     }
 
     public String getCadfin(){ 
-        if(this.cadinicio==null){
-            if(fin!=null){
-                return String.valueOf(fin.getDate()) +"/" +String.valueOf(fin.getMonth())+"/" +String.valueOf(fin.getYear());
-            }else{
-                return "";
-            }
-        }else{
-            return cadfin;
-        }
+        return cadfin;
     }
 
     public void setCadfin(String cadfin) {

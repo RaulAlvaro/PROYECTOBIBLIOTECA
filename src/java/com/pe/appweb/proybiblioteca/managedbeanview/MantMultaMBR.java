@@ -81,9 +81,12 @@ public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
     public void cargarCombosMulta(){
         try {
             //CARGAR COMBOS
+            this.multa.setIdMulta(this.multacombos.getIdMulta());
             this.multa.setInicio(this.multacombos.getInicio());
             this.multa.setFin(this.multacombos.getFin());
             this.multa.setMonto(this.multacombos.getMonto());
+            this.multa.setCadfin(this.multacombos.getCadfin());
+            this.multa.setCadinicio(this.multacombos.getCadinicio());
             this.insert = Boolean.FALSE;
 
         } catch (Exception ex) {
@@ -97,14 +100,16 @@ public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
         try {
             String respuesta;
             int idCargo = 0;
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             this.multa.setIdMulta(0);
             //this.multa.setInicio(LocalDate.parse(multa.getCadinicio(), form));
             java.util.Date parsed1 = format.parse(multa.getCadinicio());
+            
             Date sql1 = new java.sql.Date(parsed1.getTime());
-            this.multa.setInicio(sql1);
-            java.util.Date parsed2 = format.parse(multa.getCadinicio());
-            Date sql2 = new java.sql.Date(parsed1.getTime());
+            this.multa.setInicio(sql1); 
+            java.util.Date parsed2 = format.parse(multa.getCadfin());
+            
+            Date sql2 = new java.sql.Date(parsed2.getTime());
             this.multa.setFin(sql2);
             respuesta = multaDAO.RegistrarMulta(this.multa);
 
@@ -137,6 +142,14 @@ public class MantMultaMBR extends MensajeSYSUtils implements Serializable{
     
     public String actualizarMulta(){
         try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date parsed1 = format.parse(multa.getCadinicio());
+            Date sql1 = new java.sql.Date(parsed1.getTime());
+            this.multa.setInicio(sql1); 
+            java.util.Date parsed2 = format.parse(multa.getCadfin());
+            Date sql2 = new java.sql.Date(parsed2.getTime());
+            this.multa.setFin(sql2);
+            
             multaDAO.ActualizarMulta(this.multa);
             messageInfo("Correcto: Los cambios fueron guardados correctamente");
 
