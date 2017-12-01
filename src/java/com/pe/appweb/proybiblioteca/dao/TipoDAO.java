@@ -37,10 +37,6 @@ public class TipoDAO implements TipoService {
                 CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                 cs.setInt(1, tipo.getIdTipo());
                 cs.setString(2, tipo.getTipo());
-                //cs.setString(1, alumno.getNombre());
-                //cs.setString(2, alumno.getApellido());
-                //cs.setInt(3, alumno.getEdad());
-                //cs.setString(4, alumno.getDni());
                 int inserto = cs.executeUpdate();
                 if(inserto==0){
                     rpta="Error";
@@ -72,7 +68,7 @@ public class TipoDAO implements TipoService {
                 ResultSet rs = cs.executeQuery();
                 if(rs.next()){
                     tipo.setIdTipo(rs.getInt("idTipo"));
-                    tipo.setTipo("tipo");
+                    tipo.setTipo(rs.getString("tipo"));
                 }
             }catch(SQLException ex){}
             finally {

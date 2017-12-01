@@ -23,8 +23,8 @@ import javax.faces.bean.ViewScoped;
 @ManagedBean
 @ViewScoped
 public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
-
-/*
+    
+    
     private Libro libro;
     private Libro librocombos;
     private LibroDAO libroDAO;
@@ -54,40 +54,20 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
     }
 
     public String registrarLibro() {
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            boolean respuesta;
+            String respuesta;
 
-            int countReg = libroDAO.ContadorRegistroLibro(session);
-            int idCargo = 0;
-            if (countReg != 0) {
-                this.libro.setIdLibro(countReg + 1);
-            } else {
-                this.libro.setIdLibro(1);
-            }
-            libro.setTipo(tipoDAO.ListadoTipoId(this.session, this.idTipo));
+            this.libro.setIdLibro(1);
+            libro.setIdTipo(tipoDAO.ListadoTipoId(this.idTipo).getIdTipo());
             respuesta = libroDAO.RegistroLibro(this.libro);
-            this.transaction.commit();
-
-            if (respuesta) {
+            if (respuesta.equals("Registrado")) {
                 messageInfo("Se realizo la creación del Autor");
             } else {
                 messageError("NO Se realizo la creación del Autor");
             }
         } catch (Exception ex) {
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLibro";
     }
@@ -99,112 +79,61 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
     }
     
     public void listadoLibro(){
-        this.session = null;
-        this.transaction = null;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             
-            this.listalibros = libroDAO.ListadoLibrosTodos(this.session);
-            this.transaction.commit();
+            this.listalibros = libroDAO.ListadoLibrosTodos();
             //return this.listalibros;
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             //return null;
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
     }
     
     public String actualizarLibro(){
-        this.session = null;
-        this.transaction = null;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            libro.setTipo(tipoDAO.ListadoTipoId(this.session, this.idTipo));
-            libroDAO.ActualizarLibro(this.session, this.libro);
-            this.transaction.commit();
+            libro.setIdTipo(tipoDAO.ListadoTipoId(this.idTipo).getIdTipo());
+            libroDAO.ActualizarLibro(this.libro);
             this.idTipo = 0;
-            messageInfo("Correcto: Los cambios fueron guardados correctamente");
 
             insert = Boolean.FALSE;
 
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLibro";
     }
     
     public void cargarCombosLibro(){
-        this.session = null;
-        this.transaction = null;
-
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
             //CARGAR COMBOS
             this.libro.setIdLibro(this.librocombos.getIdLibro());
             this.libro.setTitulo(this.librocombos.getTitulo());
-            this.libro.setEdicion(this.librocombos.getEdicion());;
-            idTipo = this.librocombos.getTipo().getIdTipo();
+            idTipo = this.librocombos.getIdTipo();
             this.insert = Boolean.FALSE;
 
         } catch (Exception ex) {
-            System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
+            System.out.println("ERROR :" + ex.getMessage());  
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
-
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
-        }
+        } 
     }
     
     
     public String eliminarLibro(Libro libro){
-        this.session = null;
-        this.transaction = null;
-        boolean respuesta;
+        String respuesta;
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            this.transaction = this.session.beginTransaction();
-            respuesta = libroDAO.EliminarLibro(session, libro);
-            this.transaction.commit();
-            if (respuesta) {
+            respuesta = libroDAO.EliminarLibro(libro);
+            if (respuesta.equals("correcto")) {
                 messageInfo("Se realizo la elminación del Autor");
             } else {
                 messageError("NO Se realizo la eliminación del Autor");
             }
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
-            if (this.transaction != null) {
-                this.transaction.rollback();
-            }
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
 
-        } finally {
-            if (this.session != null) {
-                this.session.close();
-            }
         }
         return "/MANTENIMIENTOS/FrmMantLibro";
     }
@@ -265,8 +194,6 @@ public class MantLibroMBR extends MensajeSYSUtils implements Serializable {
     public void setIdTipo(int idTipo) {
         this.idTipo = idTipo;
     }
-    
-    */
     
 
 }

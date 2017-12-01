@@ -48,14 +48,7 @@
                                             
                                         </p:selectOneMenu>
                                     </p:column>
-                                    <p:column style="text-align: right">
-                                        <p:outputLabel  value="Edicion :" for="edicionlibro" style="font-family: arial"/>
-                                    </p:column>
-                                    <p:column>
-                                        <p:inputText size="20" maxlength="20" id="edicionlibro" value="#{mantLibroMBR.libro.edicion}"
-                                                     style="font-family: arial;">
-                                        </p:inputText>
-                                    </p:column>
+                                    
                                 </p:row>
                             </p:panelGrid>
                         </p:panel>
@@ -83,12 +76,9 @@
                                 <p:column headerText="Titulo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
                                     <h:outputText value=" #{item.titulo}"/>
                                 </p:column>
-                                <p:column headerText="Edicion" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
-                                    <h:outputText value=" #{item.edicion}"/>
-                                </p:column>
                                 
                                 <p:column headerText="Tipo" style="text-align: center;font-family: arial;font-size: 9px;width: 25%" filterBy="#{item.tipo}">
-                                    <h:outputText value=" #{mantTipoMBR.buscaTipoxId(item.tipo.idTipo)}"/>
+                                    <h:outputText value="#{mantTipoMBR.buscaTipoxId(item.idTipo)}"/>
                                 </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
                                     <p:commandButton immediate="true" value="Eliminar" action="#{mantLibroMBR.eliminarLibro(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
