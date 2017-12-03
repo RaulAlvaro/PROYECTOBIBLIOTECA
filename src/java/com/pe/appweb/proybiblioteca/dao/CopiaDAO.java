@@ -31,20 +31,15 @@ public class CopiaDAO implements CopiaService{
     public String RegistraCopia(Copia copia) {
         String rpta=null;
         Connection cn = db.getConnection();
-        String procedimientoalmacenado=("{CALL sp_insertartipolibro(?,?,?,?,?)}");
+        String procedimientoalmacenado=("{CALL sp_insertarcopia(?,?,?,?,?)}");
         if(cn!=null){
             try{
                 CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                 cs.setInt(1, copia.getIdCopia());
-                if(copia.isEstado()==false){
-                    cs.setInt(2, 0);
-                }
-                else{
-                    cs.setInt(2, 1);
-                }
-                cs.setInt(3, copia.getIdLibro());
-                cs.setInt(4, copia.getEdicion());
-                cs.setString(5, copia.getEditorial());
+                cs.setInt(2, copia.getEstado());
+                cs.setInt(3, copia.getEdicion());
+                cs.setString(4, copia.getEditorial());
+                cs.setInt(5, copia.getIdLibro());
                 
                 int inserto = cs.executeUpdate();
                 if(inserto==0){
@@ -68,7 +63,7 @@ public class CopiaDAO implements CopiaService{
     @Override
     public List<Copia> ListadoCopiassTodos() {
         List<Copia> lista=new ArrayList<>();
-        String procedimientoalmacenado="{CALL sp_listarlibro()}";
+        String procedimientoalmacenado="{CALL sp_listarcopia()}";
         Connection cn = db.getConnection();
         if(cn!=null){
             try{
@@ -76,17 +71,12 @@ public class CopiaDAO implements CopiaService{
                 ResultSet rs = cs.executeQuery();
                 while(rs.next()){
                       Copia copia = new Copia();
-                    //tipo.setIdTipo(rs.getInt("idTipo"));
-                      copia.setIdLibro(rs.getInt("idCopia"));
-                      if(rs.getInt("estado")==0){
-                          copia.setEstado(false);
-                      }
-                      else{
-                          copia.setEstado(true);
-                      }
+                      copia.setIdCopia(rs.getInt("idCopia"));
+                      copia.setEstado(rs.getInt("estado"));
                       copia.setIdLibro(rs.getInt("libro_idLibro"));
                       copia.setEdicion(rs.getInt("edicion"));
                       copia.setEditorial(rs.getString("editorial"));
+                      lista.add(copia);
                 }      
             }catch(SQLException ex){}
             finally{
@@ -112,12 +102,7 @@ public class CopiaDAO implements CopiaService{
                 ResultSet rs = cs.executeQuery();
                 if(rs.next()){
                       copia.setIdLibro(rs.getInt("idCopia"));
-                      if(rs.getInt("estado")==0){
-                          copia.setEstado(false);
-                      }
-                      else{
-                          copia.setEstado(true);
-                      }
+                      copia.setEstado(rs.getInt("estado"));
                       copia.setIdLibro(rs.getInt("libro_idLibro"));
                       copia.setEdicion(rs.getInt("edicion"));
                       copia.setEditorial(rs.getString("editorial"));
@@ -141,15 +126,10 @@ public class CopiaDAO implements CopiaService{
             try{
                 CallableStatement cs=cn.prepareCall(procedimientoalmacenado);
                 cs.setInt(1, copia.getIdCopia());
-                if(copia.isEstado()==false){
-                    cs.setInt(2, 0);
-                }
-                else{
-                    cs.setInt(2, 1);
-                }
-                cs.setInt(3, copia.getIdLibro());
-                cs.setInt(4, copia.getEdicion());
-                cs.setString(5, copia.getEditorial());
+                cs.setInt(2, copia.getEstado());
+                cs.setInt(3, copia.getEdicion());
+                cs.setString(4, copia.getEditorial());
+                cs.setInt(5, copia.getIdLibro());
                 
                 int inserto = cs.executeUpdate();
                 
@@ -172,7 +152,7 @@ public class CopiaDAO implements CopiaService{
     public String EliminarCopia(Copia copia) {
         String rpta = null;
         Connection cn = db.getConnection();
-        String procedimientoalmacenado="{CALL sp_eliminartipolibro(?)}";
+        String procedimientoalmacenado="{CALL sp_eliminarcopia(?)}";
         if(cn!=null){
             try{
                 CallableStatement cs=cn.prepareCall(procedimientoalmacenado);

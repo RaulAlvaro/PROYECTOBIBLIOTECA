@@ -29,6 +29,7 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
     private Copia copiacombos;
     private CopiaDAO copiaDAO;
     private List<Copia> listacopia;
+    private List<Copia> listacopiadisponibles;
     private Boolean insert;
     
     private int idLibro;
@@ -45,12 +46,13 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
         this.copiacombos = new Copia();
         this.copiaDAO = new CopiaDAO();
         this.listacopia = new ArrayList();
+        this.listacopiadisponibles = new ArrayList();
         this.insert = true;
         this.libro = new Libro();
     }
 
     private void initlistDep() {
-        //listadoTipo();
+        listadoCopia();
     }
     
     public String buscaCopiaxId(int id){
@@ -91,11 +93,20 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
     public void listadoCopia(){
         try {
             this.listacopia = copiaDAO.ListadoCopiassTodos();
+            listadoCopiaDisponible(listacopia);
             
         } catch (Exception ex) {
             System.out.println("ERROR :" + ex.getMessage());
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());
             //return null;
+        }
+    }
+    
+    public void listadoCopiaDisponible(List<Copia> lista){
+        for(Copia x : lista){
+            if(x.getEstado()==1){
+                this.listacopiadisponibles.add(x);
+            }
         }
     }
     
@@ -126,7 +137,7 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
             */
             this.copia.setIdCopia(this.copiacombos.getIdCopia());
             this.idLibro = this.copiacombos.getIdLibro();
-            this.copia.setEstado(this.copiacombos.isEstado());
+            this.copia.setEstado(this.copiacombos.getEstado());
             this.copia.setEdicion(this.copiacombos.getEdicion());
             this.copia.setEditorial(this.copiacombos.getEditorial());
             this.insert = Boolean.FALSE;
@@ -138,7 +149,7 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
     }
     
     
-    public String eliminarLibro(Copia copia){
+    public String eliminarCopia(Copia copia){
         String respuesta;
         try {
             respuesta = copiaDAO.EliminarCopia(copia);
@@ -210,6 +221,14 @@ public class MantCopiaMBR extends MensajeSYSUtils implements Serializable{
 
     public void setLibro(Libro libro) {
         this.libro = libro;
+    }
+
+    public List<Copia> getListacopiadisponibles() {
+        return listacopiadisponibles;
+    }
+
+    public void setListacopiadisponibles(List<Copia> listacopiadisponibles) {
+        this.listacopiadisponibles = listacopiadisponibles;
     }
     
     

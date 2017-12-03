@@ -51,8 +51,9 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="devueltoprestamo" value="#{mantPrestamoMBR.prestamo.devuelto}" style="width:125px">
-                                            <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                            <f:selectItem itemLabel="Seleccione devuelto : " itemValue=""/>
                                             <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                            <f:selectItem itemLabel="Activo" itemValue="1"/>
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align: right">
@@ -60,8 +61,9 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="agregadoprestamo" value="#{mantPrestamoMBR.prestamo.agregado}" style="width:125px">
-                                            <f:selectItem itemLabel="Activo" itemValue="1"/>
+                                            <f:selectItem itemLabel="Seleccione agregado : " itemValue=""/>
                                             <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                                            <f:selectItem itemLabel="Activo" itemValue="1"/>
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
@@ -71,7 +73,7 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="idpersonal" value="#{mantPrestamoMBR.idPersonal}" style="font-family: arial;width: 180px">                                        
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo : "/>                                             
                                             <f:selectItems value="#{mantPersonalMBR.listapersonal}" var="idet" itemLabel="#{idet.nombre}" itemValue="#{idet.idPersonal}"/> 
                                         </p:selectOneMenu>
                                     </p:column>
@@ -81,7 +83,7 @@
                                     <p:column>
                                         <p:selectOneMenu id="idcopia" value="#{mantPrestamoMBR.idCopia}" style="font-family: arial;width: 180px">                                        
                                             <f:selectItem itemValue="0" itemLabel="Seleccione copia"/>                                             
-                                            <f:selectItems value="#{mantCopiaMBR.listacopia}" var="idet" itemLabel="#{idet.idCopia}" itemValue="#{idet.idCopia}"/> 
+                                            <f:selectItems value="#{mantCopiaMBR.listacopiadisponibles}" var="idet" itemLabel="#{idet.idCopia}" itemValue="#{idet.idCopia}"/> 
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>    

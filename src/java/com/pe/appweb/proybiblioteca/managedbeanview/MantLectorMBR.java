@@ -55,8 +55,8 @@ public class MantLectorMBR extends MensajeSYSUtils implements Serializable{
             int telefonolector = buscalector.getTelefono();
             String sexolector = buscalector.getSexo();
             int strikeslector = buscalector.getStrikes();
-            boolean estadolector = buscalector.isEstado();
-            String cadena = nombreslector + apellidoslector + telefonolector + sexolector + strikeslector + estadolector;
+            int estadolector = buscalector.getEstado();
+            String cadena = nombreslector + apellidoslector + String.valueOf(telefonolector) + sexolector + String.valueOf(strikeslector) + String.valueOf(estadolector);
             return cadena; 
     }
     
@@ -85,7 +85,7 @@ public class MantLectorMBR extends MensajeSYSUtils implements Serializable{
             this.lector.setApellidos(this.lectorcombos.getApellidos());
             this.lector.setTelefono(this.lectorcombos.getTelefono());
             this.lector.setSexo(this.lectorcombos.getSexo());
-            this.lector.setEstado(this.lectorcombos.isEstado());
+            this.lector.setEstado(this.lectorcombos.getEstado());
             this.lector.setStrikes(this.lectorcombos.getStrikes());
             this.insert = Boolean.FALSE;
 

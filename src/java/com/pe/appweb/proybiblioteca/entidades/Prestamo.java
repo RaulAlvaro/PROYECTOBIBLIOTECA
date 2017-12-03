@@ -17,14 +17,14 @@ public class Prestamo  implements java.io.Serializable {
      private int idLector;
      private int idPersonal;
      private int idCopia;
-     private boolean devuelto;
-     private boolean agregado;
+     private int devuelto;
+     private int agregado;
      private int idMulta;
      
     public Prestamo() {
     }
 
-    public Prestamo(int idPrestamo, Date inicio, Date fin, int idLector, int idPersonal, int idCopia, boolean devuelto, boolean agregado, int idMulta) {
+    public Prestamo(int idPrestamo, Date inicio, Date fin, int idLector, int idPersonal, int idCopia, int devuelto, int agregado, int idMulta) {
         this.idPrestamo = idPrestamo;
         this.inicio = inicio;
         this.fin = fin;
@@ -84,19 +84,19 @@ public class Prestamo  implements java.io.Serializable {
         this.idCopia = idCopia;
     }
 
-    public boolean isDevuelto() {
+    public int getDevuelto() {
         return devuelto;
     }
 
-    public void setDevuelto(boolean devuelto) {
+    public void setDevuelto(int devuelto) {
         this.devuelto = devuelto;
     }
 
-    public boolean isAgregado() {
+    public int getAgregado() {
         return agregado;
     }
 
-    public void setAgregado(boolean agregado) {
+    public void setAgregado(int agregado) {
         this.agregado = agregado;
     }
 

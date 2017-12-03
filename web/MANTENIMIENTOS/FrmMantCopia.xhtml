@@ -48,13 +48,12 @@
                                 
                                 <p:row>
                                     <p:column style="text-align: right">
-                                        <p:outputLabel  value="Libro :" style="font-family: arial"/>
+                                        <p:outputLabel  value="Libro :" for="idLibro" style="font-family: arial"/>
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="idtipo" value="#{mantCopiaMBR.idLibro}" style="font-family: arial;width: 180px">                                        
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione tipo"/>                                             
+                                        <p:selectOneMenu id="idLibro" value="#{mantCopiaMBR.idLibro}" style="font-family: arial;width: 180px">                                        
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione Libro : "/>                                             
                                             <f:selectItems value="#{mantLibroMBR.listalibros}" var="idet" itemLabel="#{idet.titulo}" itemValue="#{idet.idLibro}"/> 
-                                            
                                         </p:selectOneMenu>
                                     </p:column>
                                     
@@ -63,9 +62,8 @@
                                     </p:column>
                                     <p:column>
                                         <p:selectOneMenu id="console" value="#{mantCopiaMBR.copia.estado}" style="width:125px">
-                                            <f:selectItem itemLabel="Seleccionar estado" itemValue="" />
-                                            <f:selectItem itemLabel="true" itemValue="true" />
-                                            <f:selectItem itemLabel="false" itemValue="false" />
+                                            <f:selectItem itemLabel="no disponible" itemValue="0" />
+                                            <f:selectItem itemLabel="disponible" itemValue="1" />
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
@@ -75,8 +73,8 @@
                         
                         <h:panelGrid id="panelbtn" columns="2" cellpadding="0" cellspacing="1" border="0" width="28%">
                             <p:commandButton immediate="true" value="Nuevo Registro" action="#{mantCopiaMBR.limpiarcajas()}" update=":form1,:frmListaTAutor" icon="ui-icon-document"  style="font-family: arial;font-size: 11px;"/>
-                            <p:commandButton rendered="#{mantLibroMBR.insert}" value="Grabar Registro" action="#{mantCopiaMBR.registrarCopia()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
-                            <p:commandButton rendered="#{not mantLibroMBR.insert}" value="Actualizar Registro" action="#{mantCopiaMBR.actualizarCopia()}" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
+                            <p:commandButton rendered="#{mantCopiaMBR.insert}" value="Grabar Registro" action="#{mantCopiaMBR.registrarCopia()}" update=":form1,:frmListaTAutor" icon="ui-icon-disk" style="font-family: arial;font-size: 11px;"/>
+                            <p:commandButton rendered="#{not mantCopiaMBR.insert}" value="Actualizar Registro" action="#{mantCopiaMBR.actualizarCopia()}" update=":form1,:frmListaTAutor" icon="ui-icon-pencil" style="font-family: arial;font-size: 11px;"/> 
                         </h:panelGrid>
                         
 
@@ -103,7 +101,7 @@
                                     <h:outputText value=" #{item.editorial}"/>
                                 </p:column>
                                 <p:column style="width: 15%; padding-left: 2.5em">
-                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantCopiaMBR.eliminarLibro(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
+                                    <p:commandButton immediate="true" value="Eliminar" action="#{mantCopiaMBR.eliminarCopia(item)}" update=":form1,:frmListaTAutor" style="font-family: arial;font-size: 11px;"/>
                                 </p:column>
 
                             </p:dataTable>

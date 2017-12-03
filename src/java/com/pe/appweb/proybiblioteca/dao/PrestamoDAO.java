@@ -39,19 +39,11 @@ public class PrestamoDAO implements PrestamoService{
                 cs.setInt(1, prestamo.getIdPrestamo());
                 cs.setDate(2, prestamo.getInicio());
                 cs.setDate(3, prestamo.getFin());
-                if(prestamo.isDevuelto()==false){
-                    cs.setInt(4,0);
-                }else{
-                    cs.setInt(4,1);
-                }
-                if(prestamo.isAgregado()==false){
-                    cs.setInt(5,0);
-                }else{
-                    cs.setInt(5,1);
-                }
+                cs.setInt(4,prestamo.getDevuelto());
+                cs.setInt(5,prestamo.getAgregado());
                 cs.setInt(6, prestamo.getIdLector());
                 cs.setInt(7, prestamo.getIdPersonal());
-                cs.setInt(8, prestamo.getIdLector());
+                cs.setInt(8, prestamo.getIdCopia());
                 cs.setInt(9, prestamo.getIdMulta());
                 int inserto = cs.executeUpdate();
                 if(inserto==0){
@@ -87,8 +79,8 @@ public class PrestamoDAO implements PrestamoService{
                       prestamo.setIdPrestamo(rs.getInt("IdPrestamo"));
                       prestamo.setInicio(rs.getDate("inicio"));
                       prestamo.setFin(rs.getDate("fin"));
-                      prestamo.setAgregado(rs.getBoolean("agregado"));
-                      prestamo.setDevuelto(rs.getBoolean("devuelto"));
+                      prestamo.setAgregado(rs.getInt("agregado"));
+                      prestamo.setDevuelto(rs.getInt("devuelto"));
                       prestamo.setCadinicio(rs.getString("cadinicio"));
                       prestamo.setCadfin(rs.getString("cadfin"));
                       prestamo.setIdCopia(rs.getInt("copia_idcopia"));
@@ -124,8 +116,8 @@ public class PrestamoDAO implements PrestamoService{
                      prestamo.setIdPrestamo(rs.getInt("IdPrestamo"));
                       prestamo.setInicio(rs.getDate("inicio"));
                       prestamo.setFin(rs.getDate("fin"));
-                      prestamo.setAgregado(rs.getBoolean("agregado"));
-                      prestamo.setDevuelto(rs.getBoolean("devuelto"));
+                      prestamo.setAgregado(rs.getInt("agregado"));
+                      prestamo.setDevuelto(rs.getInt("devuelto"));
                       prestamo.setCadinicio(rs.getString("cadinicio"));
                       prestamo.setCadfin(rs.getString("cadfin"));
                       prestamo.setIdCopia(rs.getInt("copia_idcopia"));
@@ -154,19 +146,11 @@ public class PrestamoDAO implements PrestamoService{
                 cs.setInt(1, prestamo.getIdPrestamo());
                 cs.setDate(2, prestamo.getInicio());
                 cs.setDate(3, prestamo.getFin());
-                if(prestamo.isDevuelto()==false){
-                    cs.setInt(4,0);
-                }else{
-                    cs.setInt(4,1);
-                }
-                if(prestamo.isAgregado()==false){
-                    cs.setInt(5,0);
-                }else{
-                    cs.setInt(5,1);
-                }
+                cs.setInt(4,prestamo.getDevuelto());
+                cs.setInt(5,prestamo.getAgregado());
                 cs.setInt(6, prestamo.getIdLector());
                 cs.setInt(7, prestamo.getIdPersonal());
-                cs.setInt(8, prestamo.getIdLector());
+                cs.setInt(8, prestamo.getIdCopia());
                 cs.setInt(9, prestamo.getIdMulta());
                 int inserto = cs.executeUpdate();
                 

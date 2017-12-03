@@ -11,7 +11,7 @@ import java.util.Set;
 public class Copia  implements java.io.Serializable {
 
     private int idCopia;
-    private boolean estado;
+    private int estado;
     private int idLibro;
     private int edicion;
     private String editorial;
@@ -19,7 +19,7 @@ public class Copia  implements java.io.Serializable {
     public Copia() {
     }
 
-    public Copia(int idCopia, boolean estado, int idLibro, int edicion, String editorial) {
+    public Copia(int idCopia, int estado, int idLibro, int edicion, String editorial) {
         this.idCopia = idCopia;
         this.estado = estado;
         this.idLibro = idLibro;
@@ -35,11 +35,11 @@ public class Copia  implements java.io.Serializable {
         this.idCopia = idCopia;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

@@ -14,13 +14,13 @@ public class Lector  implements java.io.Serializable {
      private String apellidos;
      private int telefono;
      private String sexo;
-     private boolean estado;
+     private int estado;
      private int strikes;
 
     public Lector() {
     }
 
-    public Lector(int codigo, String nombres, String apellidos, int telefono, String sexo, boolean estado, int strikes, Set prestamos, Set multas) {
+    public Lector(int codigo, String nombres, String apellidos, int telefono, String sexo, int estado, int strikes, Set prestamos, Set multas) {
        this.codigo = codigo;
        this.nombres = nombres;
        this.apellidos = apellidos;
@@ -65,11 +65,11 @@ public class Lector  implements java.io.Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    public boolean isEstado() {
+    public int setEstado() {
         return this.estado;
     }
     
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     public int getStrikes() {
@@ -80,7 +80,9 @@ public class Lector  implements java.io.Serializable {
         this.strikes = strikes;
     }
 
-
+    public int getEstado() {
+        return estado;
+    }
 }
 
 

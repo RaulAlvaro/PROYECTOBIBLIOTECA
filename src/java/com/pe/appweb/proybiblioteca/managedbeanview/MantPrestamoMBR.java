@@ -76,12 +76,12 @@ public class MantPrestamoMBR extends MensajeSYSUtils implements Serializable{
             int idLec= buscaprestamo.getIdLector();
             int idPer= buscaprestamo.getIdPersonal();
             int idCop= buscaprestamo.getIdCopia();
-            boolean dev= buscaprestamo.isDevuelto();
-            boolean agr= buscaprestamo.isAgregado();
+            int dev= buscaprestamo.getDevuelto();
+            int agr= buscaprestamo.getAgregado();
             int idMul= buscaprestamo.getIdMulta();
             String cadena = ini.toString() + f.toString() + String.valueOf(idPres) + 
                     cadini + cadf+String.valueOf(idLec)+String.valueOf(idPer)+
-                    String.valueOf(idCop)+dev+agr+String.valueOf(idMul);
+                    String.valueOf(idCop)+String.valueOf(dev)+String.valueOf(agr)+String.valueOf(idMul);
             return cadena; 
     }
     
@@ -108,8 +108,8 @@ public class MantPrestamoMBR extends MensajeSYSUtils implements Serializable{
             this.prestamo.setIdMulta(this.prestamocombos.getIdMulta());
             this.prestamo.setInicio(this.prestamocombos.getInicio());
             this.prestamo.setFin(this.prestamocombos.getFin());
-            this.prestamo.setAgregado(this.prestamocombos.isAgregado());
-            this.prestamo.setDevuelto(this.prestamocombos.isDevuelto());
+            this.prestamo.setAgregado(this.prestamocombos.getAgregado());
+            this.prestamo.setDevuelto(this.prestamocombos.getDevuelto());
             this.prestamo.setCadfin(this.prestamocombos.getCadfin());
             this.prestamo.setCadinicio(this.prestamocombos.getCadinicio());
             this.prestamo.setIdCopia(this.prestamocombos.getIdCopia());
@@ -129,23 +129,27 @@ public class MantPrestamoMBR extends MensajeSYSUtils implements Serializable{
         try {
             String respuesta;
             int idCargo = 0;
+            this.prestamo.setIdCopia(idCopia);
+            this.prestamo.setIdLector(idLector);
+            this.prestamo.setIdMulta(idMulta);
+            this.prestamo.setIdPersonal(idPersonal);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             this.prestamo.setIdMulta(0);
-            //this.multa.setInicio(LocalDate.parse(multa.getCadinicio(), form));
-            java.util.Date parsed1 = format.parse(prestamo.getCadinicio());
             
+            java.util.Date parsed1 = format.parse(prestamo.getCadinicio());
             Date sql1 = new java.sql.Date(parsed1.getTime());
             this.prestamo.setInicio(sql1); 
-            java.util.Date parsed2 = format.parse(prestamo.getCadfin());
             
+            java.util.Date parsed2 = format.parse(prestamo.getCadfin());
             Date sql2 = new java.sql.Date(parsed2.getTime());
             this.prestamo.setFin(sql2);
+            
             respuesta = prestamoDAO.RegistrarPrestamo(this.prestamo);
 
             if (respuesta.equals("Registrado")) {
-                messageInfo("Se realizo la creación de la multa");
+                messageInfo("Se realizo la creación del prestamo");
             } else {
-                messageError("NO Se realizo la creación de la multa");
+                messageError("NO Se realizo la creación del prestamo");
             }
         } catch (Exception ex) {
             messageFatal("Error Fatal: Por favor contacte con su administrador" + ex.getMessage());

@@ -40,7 +40,7 @@ public class LectorDAO implements LectorService {
                 cs.setString(3, lector.getApellidos());
                 cs.setInt(4, lector.getTelefono());
                 cs.setString(5, lector.getSexo());
-                if(lector.isEstado()==false){
+                if(lector.getEstado()==0){
                     cs.setInt(6, 0);
                 }else{
                     cs.setInt(6, 1);
@@ -82,7 +82,7 @@ public class LectorDAO implements LectorService {
                     lector.setApellidos(rs.getString("apellidos"));
                     lector.setTelefono(rs.getInt("telefono"));
                     lector.setSexo(rs.getString("sexo"));
-                    lector.setEstado(rs.getBoolean("estado"));
+                    lector.setEstado(rs.getInt("estado"));
                     lector.setStrikes(rs.getInt("strikes"));
                 }
             }catch(SQLException ex){}
@@ -112,10 +112,10 @@ public class LectorDAO implements LectorService {
                       lector.setTelefono(rs.getInt("telefono"));
                       lector.setSexo(rs.getString("sexo"));
                       if(rs.getInt("estado")==0){
-                          lector.setEstado(false);
+                          lector.setEstado(0);
                       }
                       else{
-                          lector.setEstado(true);
+                          lector.setEstado(1);
                       }
                       lector.setStrikes(rs.getInt("strikes"));
 
@@ -146,7 +146,7 @@ public class LectorDAO implements LectorService {
                 cs.setString(3, lector.getApellidos());
                 cs.setInt(4, lector.getTelefono());
                 cs.setString(5, lector.getSexo());
-                cs.setBoolean(6, lector.isEstado());
+                cs.setInt(6, lector.getEstado());
                 cs.setInt(7, lector.getStrikes());
                 int inserto = cs.executeUpdate();
                 
